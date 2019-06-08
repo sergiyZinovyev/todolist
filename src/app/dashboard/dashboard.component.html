@@ -1,4 +1,5 @@
-<header class="navbar">
-  <span (click)="auth.logout()">Logout</span>
+<header class="navbar justify-content-start mt-5">
+  <button mat-raised-button class="mx-2"  (click)="auth.logout()">Logout</button>
+  <button mat-raised-button class="mx-2" (click)="addList()">Add list</button>
 </header>
-<button class="btn btn-primary" (click)="addList()">Add list</button>
+

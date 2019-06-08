@@ -10,11 +10,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu'
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { HomeComponent } from './home/home.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +40,11 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     AngularFireAuthModule,
     MatInputModule,
+    MatButtonModule,
     ReactiveFormsModule,
+    MatMenuModule
+
+    
   ],
   providers: [
     AngularFireAuthGuard
