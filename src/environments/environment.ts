@@ -11,7 +11,10 @@ export const environment = {
     projectId: "todo-99fc4",
     storageBucket: "todo-99fc4.appspot.com",
     messagingSenderId: "437308838402",
-    appId: "1:437308838402:web:36b7f78fd6c4975f"
+    appId: "1:437308838402:web:36b7f78fd6c4975f",
+
+    production: true,
+
   }
 };
 
