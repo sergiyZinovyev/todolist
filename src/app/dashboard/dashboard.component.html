@@ -1,5 +1,48 @@
 <header class="navbar justify-content-start mt-5">
-  <button mat-raised-button class="mx-2"  (click)="auth.logout()">Logout</button>
-  <button mat-raised-button class="mx-2" (click)="addList()">Add list</button>
-</header>
+  <!-- <button mat-raised-button class="mx-2"  (click)="auth.logout()">Logout</button> -->
 
+  <!-- <button mat-raised-button class="mx-2" (click)="addList()">Add list</button> -->
+</header>
+<div class="conteiner">
+  <div class="row">
+      <div class="col-4 vertical-divider">
+        <h1 class="m-3">Add new ToDo</h1>
+        <div class="align-items-center justify-content-center m-3 border">
+          <form class="example-form" [formGroup]="myForm" >
+
+            <!-- <mat-form-field class="form-group example-full-width">
+              <input type="text" matInput placeholder="Id" formControlName="id">
+            </mat-form-field> -->
+
+            <mat-form-field class="form-group example-full-width">
+              <input type="text" matInput placeholder="name" formControlName="name">
+            </mat-form-field>
+            
+            <button mat-stroked-button class="btn-lg btn-block" (click)="addList()">Add todo</button>
+
+          </form>
+        </div>
+        <h1 class="m-3">List of ToDo</h1>
+
+      <!-- <button mat-raised-button class="mx-2" (click)="getList()">Get list todo</button> -->
+
+
+        <mat-list class="m-3" *ngFor="let x of newTodoList">
+          
+            <div class="flex-space-between mb-1">
+              {{x.name}}
+              <button mat-stroked-button class="btn-lg" (click)="delList(x.name)">Delete</button>
+            </div>
+          
+          <mat-divider></mat-divider>
+        </mat-list>
+
+    </div>
+    <div class="col-4 vertical-divider">
+      test
+    </div>
+    <div class="col-4">
+      test
+    </div>
+  </div>
+</div>

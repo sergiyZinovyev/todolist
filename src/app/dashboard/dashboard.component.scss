@@ -1,0 +1,20 @@
+.example-full-width {
+    width: 100%;
+  }
+.vertical-divider{
+    // border-top-width: 0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(173, 173, 173);
+    height: 100%;
+}
+.border{
+    padding: 10px;
+    border: 1, solid, rgb(173, 173, 173);
+    border-radius: 5px;
+}
+.flex-space-between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
