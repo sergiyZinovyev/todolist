@@ -11,6 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class DashboardComponent implements OnInit {
 
 newTodoList: any;
+newTaskList: any;
 
   constructor(
     private auth: AuthService,
@@ -30,12 +31,16 @@ newTodoList: any;
     name: ['', [Validators.required]]
   })
 
+  myTask = this.fb.group({
+    name: ['', [Validators.required]]
+  })
+
 
   addList() {
     console.log(this.myForm.value);
     console.log(this.myForm.controls['name'].value);
-    let taskName = this.myForm.controls['name'].value;
-    this.afs.doc('users/user/todolist/'+taskName).set(this.myForm.value);
+    let todoName = this.myForm.controls['name'].value;
+    this.afs.doc('users/user/todolist/'+todoName).set(this.myForm.value);
   }
 
   delList(taskName) {
@@ -49,5 +54,13 @@ newTodoList: any;
       this.newTodoList = todoList;
     });
     console.log(this.newTodoList)
+  }
+
+  addTask(){
+    ///////////////
+    console.log('test');
+    let todoName = 'todo1';
+    let taskName = this.myTask.controls['name'].value;
+    this.afs.doc('users/user/todolist/'+todoName+'/'+taskName+'/name').set(this.myTask.value);
   }
 }
