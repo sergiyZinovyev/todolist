@@ -1,9 +1,24 @@
-<header class="navbar justify-content-start navbar-dark bg-dark shadow-sm fixed-top">
-    <a class="nav-link active" routerLink="dashboard">Dashboard</a>
-    <a class="nav-link" routerLink="user/login">Login</a>
-    <a class="nav-link" routerLink="user/registration">Registration</a>
-    <a class="nav-link" mat-button color="warn" (click)="auth.logout()">Logout</a>
-  </header>
+<header class="navbar navbar-expand-sm justify-content-start navbar-dark bg-dark shadow-sm fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" mat-button [matMenuTriggerFor]="menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-brand my-0 py-0">My To-Do</div>
+    
+    <mat-menu #menu="matMenu" class="navbar justify-content-start navbar-dark bg-dark shadow-sm">
+        <a class="nav-link active" routerLink="dashboard">Dashboard</a>
+        <a class="nav-link" routerLink="user/login">Login</a>
+        <a class="nav-link" routerLink="user/registration">Registration</a>
+        <a class="nav-link" mat-button color="warn" (click)="logout()">Logout</a>
+    </mat-menu>
+
+    <div class="collapse navbar-collapse justify-content-end">
+      <a class="nav-link active" routerLink="dashboard">Dashboard</a>
+      <a class="nav-link" routerLink="user/login">Login</a>
+      <a class="nav-link" routerLink="user/registration">Registration</a>
+      <a class="nav-link" mat-button color="warn" (click)="logout()">Logout</a>
+    </div>
+</header>
 
 
 <router-outlet></router-outlet>
