@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-12 col-sm-4 vertical-divider">
-      <h3 class="m-3">Add ToDo</h3>
+      <h3 class="m-3">Add ToDo1</h3>
       <div class="align-items-center justify-content-center m-3 border">
         <form class="example-form" [formGroup]="myTask" >
           <mat-form-field class="form-group example-full-width">
@@ -48,11 +48,12 @@
         </form>
       </div>
 
-      <h3 class="m-3">ToDo name:</h3>
+      <h3 class="m-3">ToDo name: todo1</h3>
       <mat-list class="m-3" *ngFor="let x of newTaskList">
         <div class="flex-space-between mb-1">
           {{x.name}}
-          <button mat-stroked-button class="btn-lg" (click)="delList(x.name)">Delete</button>
+          <!-- <button mat-stroked-button class="btn-lg" (click)="delList(x.name)">Delete</button> -->
+          <button mat-stroked-button class="btn-lg" (click)="delTask(x.name)">Delete</button>
         </div>
         <mat-divider></mat-divider>
       </mat-list>

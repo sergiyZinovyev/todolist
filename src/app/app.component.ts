@@ -8,7 +8,8 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent {
   title = 'todo-firebase';
-
+  panelOpenState = false;
+  
   constructor(
     private auth: AuthService,
 
