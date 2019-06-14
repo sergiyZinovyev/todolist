@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  user: string = 'user';
+
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router
