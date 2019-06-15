@@ -14,9 +14,6 @@ export interface Item { id: string; name: string; };
 })
 export class DashboardComponent implements OnInit {
 
-private itemsCollection: AngularFirestoreCollection<Item>;
-//items: Observable<Item[]>;
-
 newTodoList: any;
 newTaskList: any;
 nameTodo: string;
@@ -25,10 +22,7 @@ nameTodo: string;
     private auth: AuthService,
     private afs: AngularFirestore,
     private fb: FormBuilder
-  ) { 
-    this.itemsCollection = afs.collection<Item>('items');
-    //this.items = this.itemsCollection.valueChanges();
-  }
+  ) {}
 
   ngOnInit() {
     let userDoc = this.afs.doc('users/'+this.auth.user);
@@ -43,6 +37,7 @@ nameTodo: string;
       console.log(this.newTaskList);
     })
 
+    console.log('dashboard user = '+this.auth.user);
 
   }
 
@@ -51,7 +46,12 @@ nameTodo: string;
   })
 
   myTask = this.fb.group({
-    name: ['', [Validators.required]]
+    name: ['', [Validators.required]],
+    dateOfExecution: ['', [Validators.required]],
+    priority: ['', [Validators.required]],
+    discription: ['', [Validators.required]],
+    done: ['false', [Validators.required]],
+    nowdate: [this.getCurentDate(), [Validators.required]]
   })
 
 
@@ -93,7 +93,17 @@ nameTodo: string;
   addTask(){
     let todoName = this.nameTodo;
     let taskName = this.myTask.controls['name'].value;
+
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName+'/'+todoName+'/'+taskName).set(this.myTask.value);
   }
 
+  getCurentDate(){
+    var now = new Date();
+    var curr_date = now.getDate();
+    var curr_month = now.getMonth() + 1;
+    var curr_year = now.getFullYear();
+    var formated_date = curr_year + "-" + curr_month + "-" + curr_date;
+
+    return formated_date;
+  }
 }

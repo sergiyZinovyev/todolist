@@ -6,26 +6,23 @@
 <div class="conteiner">
   <div class="row">
       <div class="col-12 col-sm-4 vertical-divider">
-        <h3 class="m-3">Add new ToDo</h3>
-        <div class="align-items-center justify-content-center m-3 border">
-          <form class="example-form" [formGroup]="myForm" >
-
-            <!-- <mat-form-field class="form-group example-full-width">
-              <input type="text" matInput placeholder="Id" formControlName="id">
-            </mat-form-field> -->
-
-            <mat-form-field class="form-group example-full-width">
-              <input type="text" matInput placeholder="name" formControlName="name">
-            </mat-form-field>
-            
-            <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">Add todo</button>
-
-          </form>
-        </div>
         <h3 class="m-3">List of ToDo</h3>
 
-      <!-- <button mat-raised-button class="mx-2" (click)="getList()">Get list todo</button> -->
-
+        <div class="mx-3">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Add new ToDo</mat-panel-title>
+              </mat-expansion-panel-header>
+              <form class="example-form" [formGroup]="myForm" >
+                <mat-form-field class="form-group example-full-width">
+                  <input type="text" matInput placeholder="name" formControlName="name">
+                </mat-form-field>
+                <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">Add todo</button>
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
 
         <mat-list class="m-3" *ngFor="let x of newTodoList">          
           <div class="flex-space-between mb-1">
@@ -38,17 +35,44 @@
     </div>
 
     <div class="col-12 col-sm-4 vertical-divider">
-      <h3 class="m-3">Add {{this.nameTodo}}</h3>
-      <div class="align-items-center justify-content-center m-3 border">
-        <form class="example-form" [formGroup]="myTask" >
-          <mat-form-field class="form-group example-full-width">
-            <input type="text" matInput placeholder="name" formControlName="name">
-          </mat-form-field>
-          <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">Add task</button>
-        </form>
-      </div>
-
       <h3 class="m-3">ToDo name: {{this.nameTodo}}</h3>
+
+      <div class="mx-3">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Add new task to {{this.nameTodo}} list</mat-panel-title>
+            </mat-expansion-panel-header>
+            <form class="example-form" [formGroup]="myTask" >
+              <mat-form-field class="form-group example-full-width">
+                <input type="text" matInput required placeholder="name" formControlName="name">
+              </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                <input type="date" matInput placeholder="date of execution" formControlName="dateOfExecution">
+              </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                  <mat-label>priority</mat-label>
+                  <select matNativeControl formControlName="priority">
+                    <option value=1>High</option>
+                    <option value=2>Normal</option>
+                    <option value=3>Low</option>
+                  </select>
+              </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                <textarea matInput placeholder="discription" formControlName="discription"></textarea>
+              </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                <input type="text" matInput placeholder="done" formControlName="done">
+              </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                <input type="text" matInput placeholder="nowdate" formControlName="nowdate">
+              </mat-form-field>
+              <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">Add task</button>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>    
+
       <mat-list class="m-3" *ngFor="let x of newTaskList">
         <div class="flex-space-between mb-1">
           {{x.name}}
@@ -60,7 +84,7 @@
     </div>
 
     <div class="col-12 col-sm-4">
-      test
+      
     </div>
 
   </div>

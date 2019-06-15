@@ -16,14 +16,22 @@ export class AuthService {
     this.afAuth.authState.subscribe(
       user => {
         console.log(user);
+        console.log(user.email);
+        this.user = user.email;
       }
     )
+    console.log(this.user);
   }
 
   registrationUser(user) {
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
       .then( user => {
         console.log(user);
+        this.afAuth.authState.subscribe(
+          user => {
+            this.user = user.email;
+          }
+        )
         this.router.navigate(['/dashboard']);
       } )
       .catch( er => console.log(er))
@@ -33,6 +41,11 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then( user => {
         console.log(user);
+        this.afAuth.authState.subscribe(
+          user => {
+            this.user = user.email;
+          }
+        )
         this.router.navigate(['/dashboard']);
       })
       .catch( er => console.log(er))
@@ -41,6 +54,7 @@ export class AuthService {
   logout() {
     this.afAuth.auth.signOut().then(
       _ => {
+        this.user = 'user';
         this.router.navigate(['/user/login']);
       }
     );
