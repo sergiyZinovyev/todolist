@@ -47,26 +47,31 @@
               <mat-form-field class="form-group example-full-width">
                 <input type="text" matInput required placeholder="name" formControlName="name">
               </mat-form-field>
-              <mat-form-field class="form-group example-full-width">
-                <input type="date" matInput placeholder="date of execution" formControlName="dateOfExecution">
-              </mat-form-field>
-              <mat-form-field class="form-group example-full-width">
-                  <mat-label>priority</mat-label>
-                  <select matNativeControl formControlName="priority">
-                    <option value=1>High</option>
-                    <option value=2>Normal</option>
-                    <option value=3>Low</option>
-                  </select>
-              </mat-form-field>
-              <mat-form-field class="form-group example-full-width">
-                <textarea matInput placeholder="discription" formControlName="discription"></textarea>
-              </mat-form-field>
-              <mat-form-field class="form-group example-full-width">
-                <input type="text" matInput placeholder="done" formControlName="done">
-              </mat-form-field>
-              <mat-form-field class="form-group example-full-width">
-                <input type="text" matInput placeholder="nowdate" formControlName="nowdate">
-              </mat-form-field>
+
+              <mat-accordion>
+                <mat-expansion-panel class='mx-n4 mb-2 mt-n4 border-0 shadow-none'>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class='text-info'>more settings...</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-form-field class="form-group example-full-width">
+                    <input type="date" matInput placeholder="date of execution" formControlName="dateOfExecution">
+                  </mat-form-field>
+                  <mat-form-field class="form-group example-full-width">
+                      <mat-label>priority</mat-label>
+                      <select matNativeControl formControlName="priority">
+                        <option value=1>High</option>
+                        <option value=2>Normal</option>
+                        <option value=3>Low</option>
+                      </select>
+                  </mat-form-field>
+                  <mat-form-field class="form-group example-full-width">
+                    <textarea matInput placeholder="discription" formControlName="discription"></textarea>
+                  </mat-form-field>
+                  <input type="hidden" formControlName="done">
+                  <input type="hidden" formControlName="nowdate">
+                </mat-expansion-panel>
+              </mat-accordion>
+
               <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">Add task</button>
             </form>
           </mat-expansion-panel>
@@ -76,7 +81,6 @@
       <mat-list class="m-3" *ngFor="let x of newTaskList">
         <div class="flex-space-between mb-1">
           {{x.name}}
-          <!-- <button mat-stroked-button class="btn-lg" (click)="delList(x.name)">Delete</button> -->
           <button mat-stroked-button class="btn-lg" (click)="delTask(x.name)">Delete</button>
         </div>
         <mat-divider></mat-divider>

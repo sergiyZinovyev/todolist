@@ -47,9 +47,9 @@ nameTodo: string;
 
   myTask = this.fb.group({
     name: ['', [Validators.required]],
-    dateOfExecution: ['', [Validators.required]],
-    priority: ['', [Validators.required]],
-    discription: ['', [Validators.required]],
+    dateOfExecution: [''],
+    priority: ['2', [Validators.required]],
+    discription: [''],
     done: ['false', [Validators.required]],
     nowdate: [this.getCurentDate(), [Validators.required]]
   })
