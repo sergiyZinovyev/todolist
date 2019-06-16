@@ -16,7 +16,16 @@ export class DashboardComponent implements OnInit {
 
 newTodoList: any;
 newTaskList: any;
+newTask: any = {
+  "dateOfExecution": "",
+  "discription": "",
+  "done": "",
+  "name": "",
+  "nowdate": "",
+  "priority": ""
+}
 nameTodo: string;
+nameTask: string;
 
   constructor(
     private auth: AuthService,
@@ -31,11 +40,19 @@ nameTodo: string;
       console.log(this.newTodoList);
     });
 
-    let todoDoc = this.afs.doc('users/'+this.auth.user);
-    todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).valueChanges().subscribe(taskList => {
+    //let todoDoc = this.afs.doc('users/'+this.auth.user);
+    userDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).valueChanges().subscribe(taskList => {
       this.newTaskList = taskList;
       console.log(this.newTaskList);
-    })
+    });
+
+    //let todoDoc = this.afs.doc('users/'+this.auth.user);
+    userDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(this.nameTask).valueChanges().subscribe(task => {
+      this.newTask = task;
+      console.log(this.newTask);
+    });
+
+
 
     console.log('dashboard user = '+this.auth.user);
 
@@ -77,6 +94,8 @@ nameTodo: string;
 
   delTask(taskName) {
     this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
+    this.newTask = {};
+    this.nameTask = '';
   }
 
 
@@ -97,10 +116,20 @@ nameTodo: string;
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName+'/'+todoName+'/'+taskName).set(this.myTask.value);
   }
 
+  getTask(name){
+    let todoDoc = this.afs.doc('users/'+this.auth.user);
+    todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
+      this.newTask = task;
+      this.nameTask = this.newTask.name;
+      console.log(this.newTask);
+    });
+    
+  }
+
   getCurentDate(){
     var now = new Date();
-    var curr_date = now.getDate();
-    var curr_month = now.getMonth() + 1;
+    var curr_date = ('0' + now.getDate()).slice(-2)
+    var curr_month = ('0' + (now.getMonth() + 1)).slice(-2);
     var curr_year = now.getFullYear();
     var formated_date = curr_year + "-" + curr_month + "-" + curr_date;
 
