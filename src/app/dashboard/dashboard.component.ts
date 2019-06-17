@@ -4,6 +4,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+
+import {MediaMatcher} from '@angular/cdk/layout';
+import {ChangeDetectorRef, OnDestroy} from '@angular/core';
+
+
 export interface Item { id: string; name: string; };
 
 
@@ -30,8 +35,14 @@ nameTask: string;
   constructor(
     private auth: AuthService,
     private afs: AngularFirestore,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit() {
     let userDoc = this.afs.doc('users/'+this.auth.user);
@@ -89,6 +100,10 @@ nameTask: string;
       });
     })
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName).delete();
+    this.newTodoList = {};
+    this.nameTodo = '';
+    this.newTask = {};
+    this.nameTask = '';
   }
 
 
@@ -135,4 +150,19 @@ nameTask: string;
 
     return formated_date;
   }
+
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+
+  
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
+
+
+
 }
