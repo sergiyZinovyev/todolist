@@ -49,9 +49,10 @@
 
           
 
-          <mat-list class="m-3" *ngFor="let x of newTaskList">
+          <mat-list class="m-1" *ngFor="let x of newTaskList">
+              <app-task [task]='x' [nameTodo]='this.nameTodo'></app-task>
           <!-- -------------------------------------------------------task list component START--------------------------------------------------------------------- -->
-            <div class="">
+            <!-- <div class="">
                 <mat-accordion class="p-0">
                   <mat-expansion-panel class='border-0 shadow-none p-0'>
                     <mat-expansion-panel-header (click)="getTask(x.name)">
@@ -89,7 +90,7 @@
                   </mat-expansion-panel>
                 </mat-accordion>
             </div>
-            <mat-divider></mat-divider>
+            <mat-divider></mat-divider> -->
             <!-- -------------------------------------------------------task list component END--------------------------------------------------------------------- -->
           </mat-list>
 
@@ -98,9 +99,10 @@
       </div>
 
 
-      <div class="col-12 col-sm-6">
+      <div class="d-none d-sm-block col-sm-6">
+        <app-sidetask></app-sidetask>
         <!-- -------------------------------------------------------side task list component START----------------------------------------------------------------- -->
-        <div *ngIf='this.nameTask'>
+        <!-- <div *ngIf='this.nameTask'>
           <h3 class="m-3">{{this.newTask.name}}</h3>
           <div class="mx-3">
             <h6 class="text-primary mt-1">date of creation:</h6>
@@ -128,7 +130,7 @@
               <button type="button" class="btn btn-secondary" (click)="delTask(this.newTask.name)">Delete</button>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- -------------------------------------------------------side task list component END----------------------------------------------------------------- -->
       </div>
   

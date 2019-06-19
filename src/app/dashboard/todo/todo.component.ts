@@ -3,7 +3,7 @@ import { AuthService } from '../../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 
-export interface Item { id: string; name: string; };
+//export interface Item { id: string; name: string; };
 
 
 @Component({
@@ -39,25 +39,25 @@ export class TodoComponent implements OnInit {
     nowdate: [this.getCurentDate(), [Validators.required]]
   })
 
-  delTask(taskName) {
-    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
-    this.nameTask = '';
-  }
+  // delTask(taskName) {
+  //   this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
+  //   this.nameTask = '';
+  // }
 
   addTask(){
     let taskName = this.myTask.controls['name'].value;
     this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
   }
 
-  getTask(name){
-    let todoDoc = this.afs.doc('users/'+this.auth.user);
-    todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
-      this.newTask = task;
-      this.nameTask = this.newTask.name;
-      console.log(this.newTask);
-    });
+  // getTask(name){
+  //   let todoDoc = this.afs.doc('users/'+this.auth.user);
+  //   todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
+  //     this.newTask = task;
+  //     this.nameTask = this.newTask.name;
+  //     console.log(this.newTask);
+  //   });
     
-  }
+  // }
 
   getCurentDate(){
     var now = new Date();

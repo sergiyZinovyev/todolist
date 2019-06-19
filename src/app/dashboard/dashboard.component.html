@@ -27,7 +27,7 @@
 
       <mat-list class="m-3" *ngFor="let x of newTodoList">          
         <div class="flex-space-between mb-1">
-          <a class="nav-link" mat-button (click)="getList(x.name)"><strong>{{x.name}}</strong></a>
+          <a class="nav-link" mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>
           <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">Delete</button>
         </div>          
         <mat-divider></mat-divider>
