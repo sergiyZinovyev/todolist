@@ -14,6 +14,7 @@ export class TaskComponent implements OnInit {
   nameTask: string;
   newTask: any;
   myclass: string;
+  taskDone: string;
  
   
   constructor(
@@ -24,6 +25,9 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myclass = this.numToColor(this.task.priority);
+    console.log(this.task.priority);
+    console.log(this.myclass);
   }
 
 
@@ -65,4 +69,26 @@ export class TaskComponent implements OnInit {
     return formated_date;
   }
 
+  numToColor (prop){
+    var num = +prop;
+    var col;
+    switch(num){
+      case 1: col = "red"; break;
+      case 2: col = "blue"; break;
+      case 3: col = "green"; break;
+      default: col = "grey"; break;
+    }
+    return col;
+  }
+  
+  taskDoneMeth(){
+    if (this.taskDone !='done'){
+      this.taskDone = 'done';
+      this.myclass = "grey"
+    }
+    else{
+      this.taskDone = 'doneNot';
+      this.myclass = this.numToColor(this.task.priority);
+    }
+  }
 }

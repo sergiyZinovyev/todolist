@@ -1,48 +1,43 @@
 
   <div class="itemTask">
   <div [ngClass]="myclass" class="priority align-baseline"></div>
-      <mat-expansion-panel class='border-0 shadow-none p-0 itemTask'>
+  <mat-expansion-panel class='border-0 shadow-none p-0 itemTask'>
 
-        <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2 m-0 pl-3">
-          <div class='text-info d-flex align-items-center'>
-            
-            <div class="nav-link ml-2" mat-button (click)="getTask(this.task.name)"><strong>{{this.task.name}}</strong></div>
-          </div>
-          
-        </mat-expansion-panel-header>
+    <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2 m-0 pl-3">
+      <div class='text-info d-flex align-items-center'>
+        
+        <div class="nav-link ml-2" mat-button (click)="getTask(this.task.name)"><strong>{{this.task.name}}</strong></div>
+      </div>
+      
+    </mat-expansion-panel-header>
 
 
-        <div class="p-3 mb-2 bg-info text-white">
-          <h6 class="text-dark mt-1">date of creation:</h6>
-          <p>{{this.task.nowdate}}</p>
-          <mat-divider></mat-divider>
+    <div class="p-3 mb-2 bg-info text-white">
+      <h6 class="text-dark mt-1">date of creation:</h6>
+      <p>{{this.task.nowdate}}</p>
+      <mat-divider></mat-divider>
 
-          <h6 class="text-dark mt-1">date of execution:</h6>
-          <p>{{this.task.dateOfExecution}}</p>
-          <mat-divider></mat-divider>
+      <h6 class="text-dark mt-1">date of execution:</h6>
+      <p>{{this.task.dateOfExecution}}</p>
+      <mat-divider></mat-divider>
 
-          <h6 class="text-dark mt-1">priority:</h6>
-          <p>{{this.task.priority}}</p>
-          <mat-divider></mat-divider>
+      <h6 class="text-dark mt-1">priority:</h6>
+      <p>{{this.task.priority}}</p>
+      <mat-divider></mat-divider>
 
-          <h6 class="text-dark mt-1">discription:</h6>
-          <p>{{this.task.discription}}</p>
-          <mat-divider></mat-divider>
+      <h6 class="text-dark mt-1">discription:</h6>
+      <p>{{this.task.discription}}</p>
+      <mat-divider></mat-divider>
 
-          <h6 class="text-dark mt-1">done:</h6>
-          <p>{{this.task.done}}</p>
-          <mat-divider></mat-divider>
+      <h6 class="text-dark mt-1">done:</h6>
+      <p>{{this.task.done}}</p>
+      <mat-divider></mat-divider>
 
-          <div class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Edit</button>
-            <button type="button" class="btn btn-secondary" (click)="delTask(this.task.name)">Delete</button>
-          </div>
-        </div>
-
-      </mat-expansion-panel>
-    
-
-    
-
-  </div>
+      <div class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">Edit</button>
+        <button type="button" class="btn btn-secondary" (click)="delTask(this.task.name)">Delete</button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</div>
 
