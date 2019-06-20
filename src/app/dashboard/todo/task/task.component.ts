@@ -15,48 +15,96 @@ export class TaskComponent implements OnInit {
   newTask: any;
   myclass: string;
   taskDone: string;
- 
+
+  myTask: any;
   
+
   constructor(
     private auth: AuthService,
     private afs: AngularFirestore,
     private fb: FormBuilder,
   ) {
+    
   }
 
   ngOnInit() {
+
+  this.myTask = this.fb.group({
+    name: [this.task.name, [Validators.required]],
+    dateOfExecution: [this.task.dateOfExecution],
+    priority: [this.task.priority, [Validators.required]],
+    discription: [this.task.discription],
+    done: [this.task.done, [Validators.required]],
+    nowdate: [this.task.nowdate, [Validators.required]],
+    nameTodo: [this.nameTodo, [Validators.required]],
+  })
+
+  this.taskDone = this.task.done;
+  
+  if(this.task.done == 'false'){
     this.myclass = this.numToColor(this.task.priority);
-    console.log(this.task.priority);
-    console.log(this.myclass);
+  }
+  if(this.task.done == 'true'){
+    this.myclass = 'grey';
+  }
+  
+  // console.log(this.task.priority);
+  // console.log(this.myclass);
+
   }
 
 
-  // myTask = this.fb.group({
-  //   name: ['', [Validators.required]],
-  //   dateOfExecution: [''],
-  //   priority: ['2', [Validators.required]],
-  //   discription: [''],
-  //   done: ['false', [Validators.required]],
-  //   nowdate: [this.getCurentDate(), [Validators.required]]
-  // })
+  
 
   delTask(taskName) {
     this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
     this.nameTask = '';
   }
 
-  // addTask(){
-  //   let taskName = this.myTask.controls['name'].value;
-  //   this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
-  // }
+  addTask(){
+    let taskName = this.myTask.controls['name'].value;
+    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
+  }
 
   getTask(name){
     let todoDoc = this.afs.doc('users/'+this.auth.user);
     todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
-      this.newTask = task;
-      this.nameTask = this.newTask.name;
-      console.log(this.newTask);
-    }); 
+      this.task = task;
+      this.nameTask = this.task.name;
+      console.log(this.task);
+    });
+    
+  }
+
+  editDone(){
+    if(this.task.done == 'false'){
+      this.myTask = this.fb.group({
+        name: [this.task.name, [Validators.required]],
+        dateOfExecution: [this.task.dateOfExecution],
+        priority: [this.task.priority, [Validators.required]],
+        discription: [this.task.discription],
+        done: ['true', [Validators.required]],
+        nowdate: [this.task.nowdate, [Validators.required]],
+        nameTodo: [this.nameTodo, [Validators.required]],
+      })
+      this.addTask();
+      this.getTask(this.task.name);
+      //this.myclass = 'grey';
+    }
+    else{
+      this.myTask = this.fb.group({
+        name: [this.task.name, [Validators.required]],
+        dateOfExecution: [this.task.dateOfExecution],
+        priority: [this.task.priority, [Validators.required]],
+        discription: [this.task.discription],
+        done: ['false', [Validators.required]],
+        nowdate: [this.task.nowdate, [Validators.required]],
+        nameTodo: [this.nameTodo, [Validators.required]],
+      })
+      this.addTask();
+      this.getTask(this.task.name);
+      //this.myclass = this.numToColor(this.task.priority);
+    }
   }
 
   getCurentDate(){
@@ -81,14 +129,5 @@ export class TaskComponent implements OnInit {
     return col;
   }
   
-  taskDoneMeth(){
-    if (this.taskDone !='done'){
-      this.taskDone = 'done';
-      this.myclass = "grey"
-    }
-    else{
-      this.taskDone = 'doneNot';
-      this.myclass = this.numToColor(this.task.priority);
-    }
-  }
+  
 }

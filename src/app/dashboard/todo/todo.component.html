@@ -2,7 +2,21 @@
     <div class="row">
       
   
-      <div class="col-12 col-sm-6 vertical-divider">
+      <div class="col-12 col-sm-8 vertical-divider">
+
+        <div *ngIf='!this.nameTodo'>
+          <div class="jumbotron">
+            <h1 class="display-4">Start now!</h1>
+            <p class="lead">Create your task lists and add new tasks.</p>
+            <hr class="my-4">
+            <p>Go to the menu and create your first To-Do.</p>
+            <p class="lead">
+              <!-- <a class="btn btn-primary btn-lg" (click)="this.changeDone.emit()" role="button">Get start</a> -->
+              <a mat-stroked-button class="nav-link btn btn-outline-info button-style-1 border-info text-info" (click)="this.changeDone.emit()">Get start</a>
+            </p>
+          </div>
+        </div>
+
         <div *ngIf='this.nameTodo'>
           <h3 class="m-3">{{this.nameTodo}}</h3>
     
@@ -47,51 +61,8 @@
             </mat-accordion>
           </div>    
 
-          
-
           <mat-list class="m-1" *ngFor="let x of newTaskList">
               <app-task [task]='x' [nameTodo]='this.nameTodo'></app-task>
-          <!-- -------------------------------------------------------task list component START--------------------------------------------------------------------- -->
-            <!-- <div class="">
-                <mat-accordion class="p-0">
-                  <mat-expansion-panel class='border-0 shadow-none p-0'>
-                    <mat-expansion-panel-header (click)="getTask(x.name)">
-                      <mat-panel-title class='text-info'>
-                          <a class="nav-link" mat-button (click)="getTask(x.name)"><strong>{{x.name}}</strong></a>
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="p-3 mb-2 bg-info text-white mx-3">
-                      <h6 class="text-dark mt-1">date of creation:</h6>
-                      <p>{{x.nowdate}}</p>
-                      <mat-divider></mat-divider>
-            
-                      <h6 class="text-dark mt-1">date of execution:</h6>
-                      <p>{{x.dateOfExecution}}</p>
-                      <mat-divider></mat-divider>
-            
-                      <h6 class="text-dark mt-1">priority:</h6>
-                      <p>{{x.priority}}</p>
-                      <mat-divider></mat-divider>
-            
-                      <h6 class="text-dark mt-1">discription:</h6>
-                      <p>{{x.discription}}</p>
-                      <mat-divider></mat-divider>
-            
-                      <h6 class="text-dark mt-1">done:</h6>
-                      <p>{{x.done}}</p>
-                      <mat-divider></mat-divider>
-            
-                      <div class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary">Edit</button>
-                        <button type="button" class="btn btn-secondary" (click)="delTask(x.name)">Delete</button>
-                      </div>
-                    </div>
-    
-                  </mat-expansion-panel>
-                </mat-accordion>
-            </div>
-            <mat-divider></mat-divider> -->
-            <!-- -------------------------------------------------------task list component END--------------------------------------------------------------------- -->
           </mat-list>
 
           <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>
@@ -99,7 +70,7 @@
       </div>
 
 
-      <div class="d-none d-sm-block col-sm-6">
+      <div class="d-none d-sm-block col-sm-4">
         <app-sidetask></app-sidetask>
         <!-- -------------------------------------------------------side task list component START----------------------------------------------------------------- -->
         <!-- <div *ngIf='this.nameTask'>

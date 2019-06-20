@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 
-//export interface Item { id: string; name: string; };
 
 
 @Component({
@@ -13,6 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class TodoComponent implements OnInit {
 
+  @Output() changeDone = new EventEmitter<any>();
   @Input() newTaskList: any;
   @Input() nameTodo: string;
   nameTask: string;
@@ -36,28 +36,44 @@ export class TodoComponent implements OnInit {
     priority: ['2', [Validators.required]],
     discription: [''],
     done: ['false', [Validators.required]],
-    nowdate: [this.getCurentDate(), [Validators.required]]
+    nowdate: [this.getCurentDate(), [Validators.required]],
+    nameTodo: [this.nameTodo, [Validators.required]]
   })
 
-  // delTask(taskName) {
-  //   this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
-  //   this.nameTask = '';
-  // }
+  findeName(name){
+    var item = this.newTaskList.find(item => item.name === name);
+    console.log(item);
+    return item;
+  }
 
   addTask(){
     let taskName = this.myTask.controls['name'].value;
-    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
+    if (taskName === 'Task already exist!'){return}
+    if (this.findeName(taskName)){
+      this.myTask = this.fb.group({
+        name: ['Task already exist!', [Validators.required]],
+        dateOfExecution: [''],
+        priority: ['2', [Validators.required]],
+        discription: [''],
+        done: ['false', [Validators.required]],
+        nowdate: [this.getCurentDate(), [Validators.required]],
+        nameTodo: [this.nameTodo, [Validators.required]]
+      })
+      return}
+    else {
+      this.findeName(taskName);
+      this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
+      this.myTask = this.fb.group({
+        name: ['', [Validators.required]],
+        dateOfExecution: [''],
+        priority: ['2', [Validators.required]],
+        discription: [''],
+        done: ['false', [Validators.required]],
+        nowdate: [this.getCurentDate(), [Validators.required]],
+        nameTodo: [this.nameTodo, [Validators.required]],
+      })
+    }  
   }
-
-  // getTask(name){
-  //   let todoDoc = this.afs.doc('users/'+this.auth.user);
-  //   todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
-  //     this.newTask = task;
-  //     this.nameTask = this.newTask.name;
-  //     console.log(this.newTask);
-  //   });
-    
-  // }
 
   getCurentDate(){
     var now = new Date();
@@ -68,6 +84,5 @@ export class TodoComponent implements OnInit {
 
     return formated_date;
   }
-
 
 }
