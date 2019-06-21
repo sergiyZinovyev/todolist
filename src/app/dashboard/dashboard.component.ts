@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, concat } from 'rxjs';
 
 
 import {MediaMatcher} from '@angular/cdk/layout';
@@ -19,11 +19,12 @@ export interface Item { id: string; name: string; };
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-private _mobileQueryListener: () => void;
-mobileQuery: MediaQueryList;
-newTodoList: any;
-newTaskList: any;
-nameTodo: string;
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
+  newTodoList: any;
+  newTaskList: any;
+  nameTodo: string;
+  //newArr;
 
 
   constructor(
@@ -45,18 +46,6 @@ nameTodo: string;
       console.log(this.newTodoList);
     });
 
-    //let todoDoc = this.afs.doc('users/'+this.auth.user);
-    // userDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).valueChanges().subscribe(taskList => {
-    //   this.newTaskList = taskList;
-    //   console.log(this.newTaskList);
-    // });
-
-    //let todoDoc = this.afs.doc('users/'+this.auth.user);
-    // userDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(this.nameTask).valueChanges().subscribe(task => {
-    //   this.newTask = task;
-    //   console.log(this.newTask);
-    // });
-
     console.log('dashboard user = '+this.auth.user);
 
   }
@@ -76,8 +65,6 @@ nameTodo: string;
 
 
   addList() {
-    // console.log(this.myForm.value);
-    // console.log(this.myForm.controls['name'].value);
     let todoName = this.myForm.controls['name'].value;
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName).set(this.myForm.value);
   }
@@ -93,17 +80,10 @@ nameTodo: string;
     })
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName).delete();
     this.newTodoList = {};
-    this.nameTodo = '';
-    // this.newTask = {};
-    // this.nameTask = '';
+    this.nameTodo = 'All tasks';
   }
 
 
-  // delTask(taskName) {
-  //   this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
-  //   this.newTask = {};
-  //   this.nameTask = '';
-  // }
 
 
   getList(name){
@@ -114,19 +94,34 @@ nameTodo: string;
       this.newTaskList = taskList;
       console.log(this.newTaskList);
     })
-    //this.nameTask = undefined;
   }
 
  
+  getAllTodoList(){
+    let newArr = [];
+    this.newTodoList.forEach(element => {
+      let todoDoc = this.afs.doc('users/'+this.auth.user);
+      todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(taskList => {
+        console.log(taskList);
+        newArr = newArr.concat(taskList);
+        console.log('newArr = ' + newArr);
+        this.newTaskList = newArr;
+      });
+      
+    });
+    this.nameTodo = 'All tasks';
+  }
+  
+
 
   
 
-  
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
 
 
 

@@ -25,6 +25,10 @@
         </mat-accordion>
       </div>
 
+      <div class="m-3">
+        <button class="btn btn-info btn-block" (click)="getAllTodoList(); snav.toggle()"><strong>Get all To-Do</strong></button>
+      </div>
+
       <mat-list class="m-3" *ngFor="let x of newTodoList">          
         <div class="flex-space-between mb-1">
           <a class="nav-link" mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>

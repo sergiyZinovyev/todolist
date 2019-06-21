@@ -11,7 +11,6 @@
             <hr class="my-4">
             <p>Go to the menu and create your first To-Do.</p>
             <p class="lead">
-              <!-- <a class="btn btn-primary btn-lg" (click)="this.changeDone.emit()" role="button">Get start</a> -->
               <a mat-stroked-button class="nav-link btn btn-outline-info button-style-1 border-info text-info" (click)="this.changeDone.emit()">Get start</a>
             </p>
           </div>
@@ -52,6 +51,7 @@
                       </mat-form-field>
                       <input type="hidden" formControlName="done">
                       <input type="hidden" formControlName="nowdate">
+                      <input type="hidden" formControlName="nameTodo">
                     </mat-expansion-panel>
                   </mat-accordion>
     

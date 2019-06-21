@@ -36,7 +36,7 @@ export class TaskComponent implements OnInit {
     discription: [this.task.discription],
     done: [this.task.done, [Validators.required]],
     nowdate: [this.task.nowdate, [Validators.required]],
-    nameTodo: [this.nameTodo, [Validators.required]],
+    nameTodo: [this.task.nameTodo, [Validators.required]],
   })
 
   this.taskDone = this.task.done;
@@ -50,25 +50,25 @@ export class TaskComponent implements OnInit {
   
   // console.log(this.task.priority);
   // console.log(this.myclass);
-
+  console.log(this.nameTodo);
   }
 
 
   
 
   delTask(taskName) {
-    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).delete();
+    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.task.nameTodo+'/'+this.task.nameTodo+'/'+taskName).delete();
     this.nameTask = '';
   }
 
   addTask(){
     let taskName = this.myTask.controls['name'].value;
-    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
+    this.afs.doc('users/'+this.auth.user+'/todolist/'+this.task.nameTodo+'/'+this.task.nameTodo+'/'+taskName).set(this.myTask.value);
   }
 
   getTask(name){
     let todoDoc = this.afs.doc('users/'+this.auth.user);
-    todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).doc(name).valueChanges().subscribe(task => {
+    todoDoc.collection('todolist').doc(this.task.nameTodo).collection(this.task.nameTodo).doc(name).valueChanges().subscribe(task => {
       this.task = task;
       this.nameTask = this.task.name;
       console.log(this.task);
@@ -85,7 +85,7 @@ export class TaskComponent implements OnInit {
         discription: [this.task.discription],
         done: ['true', [Validators.required]],
         nowdate: [this.task.nowdate, [Validators.required]],
-        nameTodo: [this.nameTodo, [Validators.required]],
+        nameTodo: [this.task.nameTodo, [Validators.required]],
       })
       this.addTask();
       this.getTask(this.task.name);
@@ -99,7 +99,7 @@ export class TaskComponent implements OnInit {
         discription: [this.task.discription],
         done: ['false', [Validators.required]],
         nowdate: [this.task.nowdate, [Validators.required]],
-        nameTodo: [this.nameTodo, [Validators.required]],
+        nameTodo: [this.task.nameTodo, [Validators.required]],
       })
       this.addTask();
       this.getTask(this.task.name);

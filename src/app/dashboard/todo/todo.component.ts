@@ -17,6 +17,7 @@ export class TodoComponent implements OnInit {
   @Input() nameTodo: string;
   nameTask: string;
   newTask: any;
+  myTask: any;
  
   
   constructor(
@@ -27,18 +28,26 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOnInit/this.nameTodo = '+this.nameTodo);
+    console.log('ngOnInit/this.newTaskList = '+this.newTaskList);
+    this.myTask = this.fb.group({
+      name: ['', [Validators.required]],
+      dateOfExecution: [''],
+      priority: ['2', [Validators.required]],
+      discription: [''],
+      done: ['false', [Validators.required]],
+      nowdate: [this.getCurentDate(), [Validators.required]],
+      nameTodo: [this.getNameTodo(), [Validators.required]]
+    })
+    
   }
+  
+  get name() {return this.myTask.get('name')}
 
-
-  myTask = this.fb.group({
-    name: ['', [Validators.required]],
-    dateOfExecution: [''],
-    priority: ['2', [Validators.required]],
-    discription: [''],
-    done: ['false', [Validators.required]],
-    nowdate: [this.getCurentDate(), [Validators.required]],
-    nameTodo: [this.nameTodo, [Validators.required]]
-  })
+  getNameTodo(){
+    console.log('this.nameTodo = '+this.nameTodo);
+    return this.nameTodo;
+  }
 
   findeName(name){
     var item = this.newTaskList.find(item => item.name === name);
@@ -57,10 +66,20 @@ export class TodoComponent implements OnInit {
         discription: [''],
         done: ['false', [Validators.required]],
         nowdate: [this.getCurentDate(), [Validators.required]],
-        nameTodo: [this.nameTodo, [Validators.required]]
+        nameTodo: [this.getNameTodo(), [Validators.required]]
       })
       return}
     else {
+      console.log('addTask/this.nameTodo = '+this.nameTodo);
+      this.myTask = this.fb.group({
+        name: [this.name.value, [Validators.required]],
+        dateOfExecution: [''],
+        priority: ['2', [Validators.required]],
+        discription: [''],
+        done: ['false', [Validators.required]],
+        nowdate: [this.getCurentDate(), [Validators.required]],
+        nameTodo: [this.getNameTodo(), [Validators.required]],
+      });
       this.findeName(taskName);
       this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
       this.myTask = this.fb.group({
@@ -70,7 +89,7 @@ export class TodoComponent implements OnInit {
         discription: [''],
         done: ['false', [Validators.required]],
         nowdate: [this.getCurentDate(), [Validators.required]],
-        nameTodo: [this.nameTodo, [Validators.required]],
+        nameTodo: [this.getNameTodo(), [Validators.required]],
       })
     }  
   }
