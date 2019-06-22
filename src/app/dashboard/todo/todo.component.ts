@@ -11,7 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-
+  @Output() changeAll = new EventEmitter<any>();
   @Output() changeDone = new EventEmitter<any>();
   @Input() newTaskList: any;
   @Input() nameTodo: string;
@@ -28,6 +28,7 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     console.log('ngOnInit/this.nameTodo = '+this.nameTodo);
     console.log('ngOnInit/this.newTaskList = '+this.newTaskList);
     this.myTask = this.fb.group({
@@ -104,4 +105,9 @@ export class TodoComponent implements OnInit {
     return formated_date;
   }
 
+
+  getAll(){
+    console.log('test get All');
+    this.changeAll.emit('id');
+  }
 }

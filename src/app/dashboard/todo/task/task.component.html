@@ -36,7 +36,7 @@
           </select>
         </mat-form-field> 
       </form>
-      <div class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
+      <div *ngIf="this.nameTodo != 'All tasks'" class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" (click)="addTask()">Edit</button>
         <button type="button" class="btn btn-secondary" (click)="delTask(this.task.name)">Delete</button>
       </div> 

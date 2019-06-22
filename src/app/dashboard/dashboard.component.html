@@ -41,7 +41,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' (changeDone)="snav.toggle()"></app-todo>
+      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' (changeDone)="snav.toggle()" (changeAll)="getAllTodoList()"></app-todo>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

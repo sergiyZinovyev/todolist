@@ -17,9 +17,10 @@
         </div>
 
         <div *ngIf='this.nameTodo'>
+            
           <h3 class="m-3">{{this.nameTodo}}</h3>
     
-          <div class="mx-3">
+          <div *ngIf="this.nameTodo != 'All tasks'" class="mx-3">
             <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -62,7 +63,7 @@
           </div>    
 
           <mat-list class="m-1" *ngFor="let x of newTaskList">
-              <app-task [task]='x' [nameTodo]='this.nameTodo'></app-task>
+              <app-task [task]='x' [nameTodo]='this.nameTodo' (changeDone)="getAll()"></app-task>
           </mat-list>
 
           <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>

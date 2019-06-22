@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    
   }
 
   ngOnInit() {
@@ -44,10 +45,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
       console.log(this.newTodoList);
+      this.getAllTodoList();
     });
 
     console.log('dashboard user = '+this.auth.user);
 
+    
   }
 
   myForm = this.fb.group({
@@ -100,23 +103,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getAllTodoList(){
     let newArr = [];
     this.newTodoList.forEach(element => {
+      console.log('1'+this.newTodoList);
       let todoDoc = this.afs.doc('users/'+this.auth.user);
+      let i=0;
       todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(taskList => {
-        console.log(taskList);
-        newArr = newArr.concat(taskList);
+        i = i+1;
+        console.log('2|i='+i+' | '+taskList);
+        if (i > 1){return}
+        if (i==1){
+          newArr = newArr.concat(taskList);
+        }
         console.log('newArr = ' + newArr);
-        this.newTaskList = newArr;
+        this.newTaskList = newArr;        
       });
       
     });
     this.nameTodo = 'All tasks';
   }
-  
-
-
-  
-
-
+ 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

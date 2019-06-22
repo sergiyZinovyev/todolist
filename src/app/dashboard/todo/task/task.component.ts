@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -9,8 +9,11 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
+
+  @Output() changeDone = new EventEmitter<any>();
   @Input() task: any;
   @Input() nameTodo: string;
+
   nameTask: string;
   newTask: any;
   myclass: string;
@@ -71,7 +74,7 @@ export class TaskComponent implements OnInit {
     todoDoc.collection('todolist').doc(this.task.nameTodo).collection(this.task.nameTodo).doc(name).valueChanges().subscribe(task => {
       this.task = task;
       this.nameTask = this.task.name;
-      console.log(this.task);
+      console.log('task.component/getTask/this.task = '+this.task);
     });
     
   }
@@ -88,10 +91,12 @@ export class TaskComponent implements OnInit {
         nameTodo: [this.task.nameTodo, [Validators.required]],
       })
       this.addTask();
-      this.getTask(this.task.name);
       //this.myclass = 'grey';
+      //this.getTask(this.task.name);
+     
     }
-    else{
+    //if(this.task.done == 'true'){
+    else{ 
       this.myTask = this.fb.group({
         name: [this.task.name, [Validators.required]],
         dateOfExecution: [this.task.dateOfExecution],
@@ -102,8 +107,11 @@ export class TaskComponent implements OnInit {
         nameTodo: [this.task.nameTodo, [Validators.required]],
       })
       this.addTask();
-      this.getTask(this.task.name);
       //this.myclass = this.numToColor(this.task.priority);
+      //this.getTask(this.task.name);
+    }
+    if (this.nameTodo == 'All tasks'){
+     this.changeDone.emit()
     }
   }
 
