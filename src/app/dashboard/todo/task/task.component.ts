@@ -40,6 +40,7 @@ export class TaskComponent implements OnInit {
     done: [this.task.done, [Validators.required]],
     nowdate: [this.task.nowdate, [Validators.required]],
     nameTodo: [this.task.nameTodo, [Validators.required]],
+    color: [this.task.color, [Validators.required]],
   })
 
   this.taskDone = this.task.done;
@@ -89,6 +90,7 @@ export class TaskComponent implements OnInit {
         done: ['true', [Validators.required]],
         nowdate: [this.task.nowdate, [Validators.required]],
         nameTodo: [this.task.nameTodo, [Validators.required]],
+        color: [this.task.color, [Validators.required]]
       })
       this.addTask();
       //this.myclass = 'grey';
@@ -105,6 +107,7 @@ export class TaskComponent implements OnInit {
         done: ['false', [Validators.required]],
         nowdate: [this.task.nowdate, [Validators.required]],
         nameTodo: [this.task.nameTodo, [Validators.required]],
+        color: [this.task.color, [Validators.required]]
       })
       this.addTask();
       //this.myclass = this.numToColor(this.task.priority);

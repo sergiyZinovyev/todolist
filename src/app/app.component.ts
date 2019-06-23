@@ -19,4 +19,8 @@ export class AppComponent {
   this.auth.logout()
  }
 
+ myUser(){
+  return this.auth.user
+ }
+
 }

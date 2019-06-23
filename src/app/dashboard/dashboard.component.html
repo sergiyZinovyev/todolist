@@ -19,6 +19,15 @@
               <mat-form-field class="form-group example-full-width">
                 <input type="text" matInput placeholder="name" formControlName="name">
               </mat-form-field>
+              <mat-form-field class="form-group example-full-width">
+                <!-- <input type="color" matInput placeholder="color" formControlName="color"> -->
+                <input type="color" (list)="colorList" matInput placeholder="color" formControlName="color">
+                <datalist #colorList>
+                  <option value="#ff0000" label="Red">
+                  <option value="#008000" label="Green">
+                  <option value="#0000ff" label="Blue">
+                </datalist>
+              </mat-form-field>
               <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">Add todo</button>
             </form>
           </mat-expansion-panel>
@@ -30,8 +39,8 @@
       </div>
 
       <mat-list class="m-3" *ngFor="let x of newTodoList">          
-        <div class="flex-space-between mb-1">
-          <a class="nav-link" mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>
+        <div class="flex-space-between mb-1" >
+          <a class="nav-link" [ngStyle]='{"background-color": x.color}' mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>
           <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">Delete</button>
         </div>          
         <mat-divider></mat-divider>
@@ -41,7 +50,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' (changeDone)="snav.toggle()" (changeAll)="getAllTodoList()"></app-todo>
+      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' [color]='this.color' (changeDone)="snav.toggle()" (changeAll)="getAllTodoList()"></app-todo>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

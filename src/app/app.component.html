@@ -9,14 +9,16 @@
         <a class="nav-link active" routerLink="dashboard">Dashboard</a>
         <a class="nav-link" routerLink="user/login">Login</a>
         <a class="nav-link" routerLink="user/registration">Registration</a>
-        <a class="nav-link" mat-button color="warn" (click)="logout()">Logout</a>
+        <a class="nav-link" mat-button color="warn" (click)="logout()">Logout ({{myUser()}})</a>
+        <!-- <span class="text-muted" >{{auth.user}}</span> -->
     </mat-menu>
 
     <div class="collapse navbar-collapse justify-content-end">
       <a class="nav-link active" routerLink="dashboard">Dashboard</a>
       <a class="nav-link" routerLink="user/login">Login</a>
       <a class="nav-link" routerLink="user/registration">Registration</a>
-      <a class="nav-link" mat-button color="warn" (click)="logout()">Logout</a>
+      <a class="nav-link" mat-button color="warn" (click)="logout()">Logout ({{myUser()}})</a>
+      <!-- <span class="text-muted" >{{auth.user}}</span> -->
     </div>
 </header>
 

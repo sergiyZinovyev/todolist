@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   newTaskList: any;
   nameTodo: string;
   //newArr;
+  color: any;
 
 
   constructor(
@@ -44,7 +45,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let userDoc = this.afs.doc('users/'+this.auth.user);
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
-      console.log(this.newTodoList);
+      //this.color = todoList[5].color;
+      console.log('dashboard.component/ngOInit/this.newTodoList = '+this.newTodoList);
+      //console.log('dashboard.component/ngOInit/this.color = '+this.color);
       this.getAllTodoList();
     });
 
@@ -54,8 +57,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   myForm = this.fb.group({
-    name: ['', [Validators.required]]
+    name: ['', [Validators.required]],
+    color: ['#ccf2ff', [Validators.required]],
   })
+
+  get myFormName() {return this.myForm.get('name')}
+  get myFormColor() {return this.myForm.get('color')}
+  
+
 
   // myTask = this.fb.group({
   //   name: ['', [Validators.required]],
@@ -70,6 +79,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   addList() {
     let todoName = this.myForm.controls['name'].value;
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName).set(this.myForm.value);
+  }
+
+  editList(){
+
   }
 
 
@@ -95,8 +108,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let todoDoc = this.afs.doc('users/'+this.auth.user);
     todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).valueChanges().subscribe(taskList => {
       this.newTaskList = taskList;
-      console.log(this.newTaskList);
+      console.log('dashboard.component/getList/this.newTaskList = '+this.newTaskList);
     })
+    this.newTodoList.forEach(element => {
+      if (element.name == name){
+        this.color = element.color
+      }
+    })
+    console.log(this.color);
   }
 
  

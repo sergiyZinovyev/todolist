@@ -15,6 +15,7 @@ export class TodoComponent implements OnInit {
   @Output() changeDone = new EventEmitter<any>();
   @Input() newTaskList: any;
   @Input() nameTodo: string;
+  @Input() color: string;
   nameTask: string;
   newTask: any;
   myTask: any;
@@ -38,12 +39,17 @@ export class TodoComponent implements OnInit {
       discription: [''],
       done: ['false', [Validators.required]],
       nowdate: [this.getCurentDate(), [Validators.required]],
-      nameTodo: [this.getNameTodo(), [Validators.required]]
+      nameTodo: [this.getNameTodo(), [Validators.required]],
+      color: [this.color, [Validators.required]]
     })
     
   }
   
   get name() {return this.myTask.get('name')}
+  get dateOfExecution() {return this.myTask.get('dateOfExecution')}
+  get priority() {return this.myTask.get('priority')}
+  get discription() {return this.myTask.get('discription')}
+  get done() {return this.myTask.get('done')}
 
   getNameTodo(){
     console.log('this.nameTodo = '+this.nameTodo);
@@ -67,19 +73,21 @@ export class TodoComponent implements OnInit {
         discription: [''],
         done: ['false', [Validators.required]],
         nowdate: [this.getCurentDate(), [Validators.required]],
-        nameTodo: [this.getNameTodo(), [Validators.required]]
+        nameTodo: [this.getNameTodo(), [Validators.required]],
+        color: [this.color, [Validators.required]]
       })
       return}
     else {
       console.log('addTask/this.nameTodo = '+this.nameTodo);
       this.myTask = this.fb.group({
         name: [this.name.value, [Validators.required]],
-        dateOfExecution: [''],
-        priority: ['2', [Validators.required]],
-        discription: [''],
-        done: ['false', [Validators.required]],
+        dateOfExecution: [this.dateOfExecution.value],
+        priority: [this.priority.value, [Validators.required]],
+        discription: [this.discription.value],
+        done: [this.done.value, [Validators.required]],
         nowdate: [this.getCurentDate(), [Validators.required]],
         nameTodo: [this.getNameTodo(), [Validators.required]],
+        color: [this.color, [Validators.required]]
       });
       this.findeName(taskName);
       this.afs.doc('users/'+this.auth.user+'/todolist/'+this.nameTodo+'/'+this.nameTodo+'/'+taskName).set(this.myTask.value);
@@ -91,6 +99,7 @@ export class TodoComponent implements OnInit {
         done: ['false', [Validators.required]],
         nowdate: [this.getCurentDate(), [Validators.required]],
         nameTodo: [this.getNameTodo(), [Validators.required]],
+        color: [this.color, [Validators.required]]
       })
     }  
   }

@@ -1,15 +1,15 @@
 
-<div class="itemTask">
+<div class="itemTask" [ngStyle] = '{"background-color": this.task.color}'>
   <div [ngClass]="myclass" class="priority align-baseline" (click)="editDone()"></div>
-  <mat-expansion-panel class='border-0 shadow-none p-0 itemTask'>
+  <mat-expansion-panel class='border-0 shadow-none p-0 itemTask' [ngStyle] = '{"background-color": this.task.color}'>
 
     <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2 m-0 pl-3">
-      <div class='text-info d-flex align-items-center'>
+      <div class='d-flex align-items-center'>
         <div class="nav-link ml-2"><strong [ngClass]="taskDone">{{this.task.name}}</strong></div>
       </div> 
     </mat-expansion-panel-header>
 
-    <div class="p-3 mb-2 bg-info text-white">
+    <div class="p-3 mb-2 text-white" [ngStyle] = '{"background-color": this.task.color}'>
       <form class="example-form" [formGroup]="myTask" >
         <mat-form-field class="form-group example-full-width">
           <input type="text" matInput placeholder="date of creation" formControlName="nowdate">
