@@ -38,10 +38,17 @@
         <button class="btn btn-info btn-block" (click)="getAllTodoList(); snav.toggle()"><strong>Get all To-Do</strong></button>
       </div>
 
-      <mat-list class="m-3" *ngFor="let x of newTodoList">          
+      <mat-list class="m-3" *ngFor="let x of newTodoList; let i = index">          
         <div class="flex-space-between mb-1" >
           <a class="nav-link" [ngStyle]='{"background-color": x.color}' mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>
-          <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">Delete</button>
+          <div class="position">
+            <button mat-stroked-button class="btn-lg button-style-1 mr-1" mat-button (click)="i = (i+1)*-1; getCurrentColor(x.name)">color</button>      
+              <div *ngIf="!(i >= 0)" class="color-menu">
+                <input type="color" class="btn-lg button-style-1 p-0" [(ngModel)]="newColor"><br>
+                <button mat-stroked-button class="btn-lg button-style-1" (click)="editList(x.name); i = (i+1)*-1">Edit</button>
+              </div>
+            <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">Delete</button>
+          </div>
         </div>          
         <mat-divider></mat-divider>
       </mat-list>
@@ -55,3 +62,5 @@
 
   </mat-sidenav-container>
 </div>
+
+

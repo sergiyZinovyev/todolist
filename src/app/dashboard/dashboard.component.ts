@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nameTodo: string;
   //newArr;
   color: any;
+  newColor = '#ccf2ff';
+  isShown: boolean = false;
 
 
   constructor(
@@ -45,9 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let userDoc = this.afs.doc('users/'+this.auth.user);
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
-      //this.color = todoList[5].color;
       console.log('dashboard.component/ngOInit/this.newTodoList = '+this.newTodoList);
-      //console.log('dashboard.component/ngOInit/this.color = '+this.color);
       this.getAllTodoList();
     });
 
@@ -65,27 +65,44 @@ export class DashboardComponent implements OnInit, OnDestroy {
   get myFormColor() {return this.myForm.get('color')}
   
 
-
-  // myTask = this.fb.group({
-  //   name: ['', [Validators.required]],
-  //   dateOfExecution: [''],
-  //   priority: ['2', [Validators.required]],
-  //   discription: [''],
-  //   done: ['false', [Validators.required]],
-  //   nowdate: [this.getCurentDate(), [Validators.required]]
-  // })
-
-
   addList() {
     let todoName = this.myForm.controls['name'].value;
     this.afs.doc('users/'+this.auth.user+'/todolist/'+todoName).set(this.myForm.value);
   }
 
-  editList(){
-
+  editList(nameList){
+    console.log('data: ');
+    console.log(this.myForm.value);
+    console.log('name:'+nameList);
+    let data = {
+      name: nameList,
+      color: this.newColor,
+    }
+    console.log(data);
+    this.afs.doc('users/'+this.auth.user+'/todolist/'+nameList).set(data);
+    let todoDoc = this.afs.doc('users/'+this.auth.user);
+    todoDoc.collection('todolist').doc(nameList).collection(nameList).valueChanges().subscribe(taskList => {
+      taskList.forEach(element => {
+        this.afs.doc('users/'+this.auth.user+'/todolist/'+nameList+'/'+nameList+'/'+element.name).set({
+          name: element.name,
+          dateOfExecution: element.dateOfExecution,
+          priority: element.priority,
+          discription: element.discription,
+          done: element.done,
+          nowdate: element.nowdate,
+          nameTodo: element.nameTodo,
+          color: this.newColor});
+        console.log(element);
+      });
+    })
   }
 
+  getCurrentColor(nameList){
+    this.afs.doc('users/'+this.auth.user+'/todolist/'+nameList).valueChanges().subscribe(list =>{
+      console.log(list);
+    })
 
+  }
 
   delList(todoName) {
     let todoDoc = this.afs.doc('users/'+this.auth.user);
@@ -115,24 +132,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.color = element.color
       }
     })
-    console.log(this.color);
+    //console.log(this.color);
   }
 
  
   getAllTodoList(){
     let newArr = [];
     this.newTodoList.forEach(element => {
-      console.log('1'+this.newTodoList);
+      //console.log('1'+this.newTodoList);
       let todoDoc = this.afs.doc('users/'+this.auth.user);
       let i=0;
       todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(taskList => {
         i = i+1;
-        console.log('2|i='+i+' | '+taskList);
+        //console.log('2|i='+i+' | '+taskList);
         if (i > 1){return}
         if (i==1){
           newArr = newArr.concat(taskList);
         }
-        console.log('newArr = ' + newArr);
+        //console.log('newArr = ' + newArr);
         this.newTaskList = newArr;        
       });
       
@@ -140,6 +157,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.nameTodo = 'All tasks';
   }
  
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

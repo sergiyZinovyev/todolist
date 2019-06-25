@@ -70,3 +70,28 @@
   .new{
     background-color: aqua;
   }
+  input[type="color"] {
+    padding: 0px;
+    margin: 0px;
+    -webkit-appearance: none;
+    border: none;
+    //background: #fff;
+    //width: 100%;
+    //height: 50px;
+    //border-radius: 50%;
+    overflow: hidden;
+    outline: none;
+    cursor: inherit;
+  }
+  .position{
+    position: relative;
+  }
+  .color-menu{
+    position: absolute;
+    top: 41px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 100;
+  }
