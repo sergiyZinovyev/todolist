@@ -3,10 +3,24 @@
   <div [ngClass]="myclass" class="priority align-baseline" (click)="editDone()"></div>
   <mat-expansion-panel class='border-0 shadow-none p-0 itemTask' [ngStyle] = '{"background-color": this.task.color}'>
 
-    <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2 m-0 pl-3">
-      <div class='d-flex align-items-center'>
-        <div class="nav-link ml-2"><strong [ngClass]="taskDone">{{this.task.name}}</strong></div>
-      </div> 
+    <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2">
+
+          <div class="col-12 col-sm-9 col-md-5 col-lg-5">
+              <div class="ml-3"><strong [ngClass]="taskDone">{{this.task.name}}</strong></div>
+          </div>
+
+          <div class="boarder d-none d-md-block col-md-5 col-lg-5">
+              <div class=""><strong [ngClass]="taskDone">{{this.task.nameTodo}}</strong></div>
+          </div>
+
+          <div class="boarder d-none d-lg-block col-lg-1">
+            <div class=""><strong [ngClass]="taskDone">{{this.task.nowdate}}</strong></div>
+          </div>
+
+          <div class="boarder d-none d-sm-block col-sm-3 col-md-2 col-lg-1">
+              <div class=""><strong [ngClass]="taskDone">{{this.task.dateOfExecution}}</strong></div>
+          </div>
+
     </mat-expansion-panel-header>
 
     <div class="p-3 mb-2 text-white" [ngStyle] = '{"background-color": this.task.color}'>

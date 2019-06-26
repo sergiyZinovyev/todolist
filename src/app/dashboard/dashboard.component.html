@@ -57,7 +57,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' [color]='this.color' (changeDone)="snav.toggle()" (changeAll)="getAllTodoList()"></app-todo>
+      <app-todo [nameTodo]='this.nameTodo' [newTaskList]='this.newTaskList' [color]='this.color' (changeDone)="snav.toggle()" (changeAll)="getAllTodoList()" (getCurrentList)="getList($event)"></app-todo>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

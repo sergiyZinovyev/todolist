@@ -2,7 +2,7 @@
     <div class="row">
       
   
-      <div class="col-12 col-sm-8 vertical-divider">
+      <div class="col-12 col-sm-12 vertical-divider">
 
         <div *ngIf='!this.nameTodo'>
           <div class="jumbotron">
@@ -20,7 +20,7 @@
             
           <h3 class="m-3">{{this.nameTodo}}</h3>
     
-          <div *ngIf="this.nameTodo != 'All tasks'" class="mx-3">
+          <div *ngIf="this.nameTodo != 'All tasks'" class="mx-3 mb-2">
             <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -60,21 +60,44 @@
                 </form>
               </mat-expansion-panel>
             </mat-accordion>
-          </div>    
+          </div>
+          
+          <div class="mx-1 d-none d-sm-block">
+            <div class="row mx-3 text-info mb-n4">
 
-          <mat-list class="m-1" *ngFor="let x of newTaskList">
+              <div class="col-12 col-sm-9 col-md-5 col-lg-5">
+                <div class="ml-3"><strong class="cursorPointer" (click) = "changeFiltr('name')">Task {{nameDirect}}</strong></div>
+              </div>
+
+              <div class="d-none d-md-block col-md-5 col-lg-5">
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nameTodo')">Todo {{nameTodoDirect}}</strong></div>
+              </div>
+
+              <div class="d-none d-lg-block col-lg-1">
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nowdate')">Creation {{nowdateDirect}}</strong></div>
+              </div>
+
+              <div class="d-none d-sm-block col-sm-3 col-md-2 col-lg-1">
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('dateOfExecution')">Execution {{dateOfExecutionDirect}}</strong></div>
+              </div>
+            </div>
+            <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>
+          </div>
+
+          <mat-list class="m-1" *ngFor="let x of newTaskList | filtr : filtrParam">
               <app-task [task]='x' [nameTodo]='this.nameTodo' (changeDone)="getAll()"></app-task>
           </mat-list>
+          
 
-          <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>
+          <mat-divider class="border-bottom border-info mx-1 shadow-sm"></mat-divider>
         </div>
       </div>
 
-
-      <div class="d-none d-sm-block col-sm-4">
+      <!-- -------------------------------------------------------side task list component START----------------------------------------------------------------- -->
+      <!-- <div class="d-none d-sm-block col-sm-4">
         <app-sidetask></app-sidetask>
-        <!-- -------------------------------------------------------side task list component START----------------------------------------------------------------- -->
-        <!-- <div *ngIf='this.nameTask'>
+        
+        <div *ngIf='this.nameTask'>
           <h3 class="m-3">{{this.newTask.name}}</h3>
           <div class="mx-3">
             <h6 class="text-primary mt-1">date of creation:</h6>
@@ -102,9 +125,9 @@
               <button type="button" class="btn btn-secondary" (click)="delTask(this.newTask.name)">Delete</button>
             </div>
           </div>
-        </div> -->
-        <!-- -------------------------------------------------------side task list component END----------------------------------------------------------------- -->
-      </div>
-  
+        </div>
+        
+      </div> -->
+       <!-- -------------------------------------------------------side task list component END----------------------------------------------------------------- -->
     </div>
   </div>

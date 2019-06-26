@@ -69,6 +69,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { TodoComponent } from './dashboard/todo/todo.component';
 import { TaskComponent } from './dashboard/todo/task/task.component';
 import { SidetaskComponent } from './dashboard/todo/sidetask/sidetask.component';
+import { FiltrPipe } from './filtr.pipe';
 
 
 
@@ -85,7 +86,8 @@ import { SidetaskComponent } from './dashboard/todo/sidetask/sidetask.component'
     HomeComponent,
     TodoComponent,
     TaskComponent,
-    SidetaskComponent
+    SidetaskComponent,
+    FiltrPipe
   ],
   imports: [
     BrowserModule,

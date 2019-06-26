@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   color: any;
   newColor = '#ccf2ff';
   isShown: boolean = false;
+  
 
 
   constructor(
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 1700px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     
