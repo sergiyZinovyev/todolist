@@ -17,6 +17,8 @@ export class TodoComponent implements OnInit {
   @Input() newTaskList: any;
   @Input() nameTodo: string;
   @Input() color: string;
+
+  visible = false;
   nameTask: string;
   newTask: any;
   myTask: any;
@@ -24,6 +26,11 @@ export class TodoComponent implements OnInit {
   filtrParam: {column: string, direct: string} = {
     column: "dateOfExecution",
     direct: "desc"
+  }
+
+  filtrParamDone: {column: string, direct: string} = {
+    column: "done",
+    direct: "asc"
   }
 
   nameDirect;

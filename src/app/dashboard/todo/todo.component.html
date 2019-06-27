@@ -17,9 +17,33 @@
         </div>
 
         <div *ngIf='this.nameTodo'>
-            
-          <h3 class="m-3">{{this.nameTodo}}</h3>
-    
+          <div class="d-flex justify-content-between"> 
+            <h5 class="m-3 text-info">{{this.nameTodo}}</h5>
+
+          
+              <div class="position d-block d-sm-none">
+                <button type="button" class="btn btn-outline-info mt-2 mr-2" (click)="visible = !visible">Sort data ↓↑</button>      
+                <div *ngIf="visible" class="color-menu bg-info">
+                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('name')">
+                    Task {{nameDirect}}
+                  </button><hr class="text-white my-0 mx-2">
+                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nameTodo')">
+                    Todo {{nameTodoDirect}}
+                  </button><hr class="text-white my-0 mx-2">
+                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nowdate')">
+                    Creation {{nowdateDirect}}
+                  </button><hr class="text-white my-0 mx-2">
+                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('dateOfExecution')">
+                    Execution {{dateOfExecutionDirect}}
+                  </button><hr class="text-white my-0 mx-2">
+                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('priority')">
+                    Priority {{priorityDirect}}
+                  </button><hr class="text-white my-0 mx-2"> 
+                </div>
+              </div>
+           
+
+          </div>
           <div *ngIf="this.nameTodo != 'All tasks'" class="mx-3 mb-2">
             <mat-accordion>
               <mat-expansion-panel>
@@ -63,8 +87,14 @@
           </div>
           
           <div class="mx-1 d-none d-sm-block">
+            <div class="text-info mb-n4 ml-2">
+              <strong class="cursorPointer" >
+                <div class="material-icons priority p-0 m-0" (click) = "changeFiltr('priority')">lens</div>
+                <span>{{priorityDirect}}</span>
+              </strong>
+            </div>
             <div class="row mx-3 text-info mb-n4">
-
+              
               <div class="col-12 col-sm-9 col-md-5 col-lg-5">
                 <div class="ml-3"><strong class="cursorPointer" (click) = "changeFiltr('name')">Task {{nameDirect}}</strong></div>
               </div>
@@ -84,7 +114,7 @@
             <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>
           </div>
 
-          <mat-list class="m-1" *ngFor="let x of newTaskList | filtr : filtrParam">
+          <mat-list class="m-1" *ngFor="let x of newTaskList | filtr : filtrParam | filtr : filtrParamDone">
               <app-task [task]='x' [nameTodo]='this.nameTodo' (changeDone)="getAll()"></app-task>
           </mat-list>
           

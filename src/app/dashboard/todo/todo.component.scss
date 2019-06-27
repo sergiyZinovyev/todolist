@@ -72,3 +72,32 @@
   .cursorPointer {
     cursor: pointer;
   }
+
+  .position{
+    position: relative;
+  }
+  .color-menu{
+    position: absolute;
+    top: 49px;
+    width: 93%;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    padding: 0px;
+    z-index: 100;
+  }
+
+  .priority{
+    position: relative;
+    top: 6px;
+    left: 2px;
+    z-index: 100;
+    // width: 20px;
+    // height: 20px;
+    // border-radius: 10px;
+    // margin-right: 5px;
+    //background: red;
+  }
+
+ 
+  
