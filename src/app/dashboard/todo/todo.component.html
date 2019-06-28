@@ -4,7 +4,7 @@
   
       <div class="col-12 col-sm-12 vertical-divider">
 
-        <div *ngIf='!this.nameTodo'>
+        <div *ngIf='!this.newTaskList'>
           <div class="jumbotron">
             <h1 class="display-4">Start now!</h1>
             <p class="lead">Create your task lists and add new tasks.</p>
@@ -16,9 +16,9 @@
           </div>
         </div>
 
-        <div *ngIf='this.nameTodo'>
+        <div *ngIf='this.newTaskList'>
           <div class="d-flex justify-content-between"> 
-            <h5 class="m-3 text-info">{{this.nameTodo}}</h5>
+            <h5 class="m-3 ml-5 text-info">{{this.nameTodo}}</h5>
 
           
               <div class="position d-block d-sm-none">

@@ -1,13 +1,13 @@
 
 
 <div class="example-container mt-5" [class.example-is-mobile]="mobileQuery.matches" >
-  <a class="fixed" mat-icon-button (click)="snav.toggle()"><mat-icon class="ml-n4 text-info font-weight-bold mt-4">more_vert</mat-icon></a>
+  <a class="fixed" mat-icon-button (click)="snav.toggle()"><mat-icon class="text-info font-weight-bold mt-3">menu</mat-icon></a>
 
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
     
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
-      <h3 class="m-3">List of ToDo</h3>
+      <h3 class="m-3 ml-5">List of ToDo</h3>
 
       <div class="mx-3">
         <mat-accordion>

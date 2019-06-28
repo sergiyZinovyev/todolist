@@ -50,7 +50,7 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    console.log(this.newTaskList)
     console.log('ngOnInit/this.nameTodo = '+this.nameTodo);
     console.log('ngOnInit/this.newTaskList = '+this.newTaskList);
     this.myTask = this.fb.group({
