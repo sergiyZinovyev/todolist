@@ -70,6 +70,7 @@ import { TodoComponent } from './dashboard/todo/todo.component';
 import { TaskComponent } from './dashboard/todo/task/task.component';
 import { SidetaskComponent } from './dashboard/todo/sidetask/sidetask.component';
 import { FiltrPipe } from './filtr.pipe';
+import { TranslatePipe } from './translate.pipe';
 
 
 
@@ -87,7 +88,8 @@ import { FiltrPipe } from './filtr.pipe';
     TodoComponent,
     TaskComponent,
     SidetaskComponent,
-    FiltrPipe
+    FiltrPipe,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,

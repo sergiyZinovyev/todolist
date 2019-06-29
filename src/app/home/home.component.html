@@ -1,16 +1,16 @@
-<div class="back">
+<div class="back mt-n5 mt-sm-1">
   <div class="container-fluid main">
     <h1 class="text-center display-4 mb-0">TO DO IT</h1>
     <hr class="m-1 divider">
-    <h5 class="text-center">Achieve the unattainable!</h5>
+    <h5 class="text-center">{{homeHead | translate}}</h5>
 
     <div class="but-m">
-      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goLogin()"><div class="text-white bg-dark rounded mx-3">Sign in</div></button>
-      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goRegistration()"><div class="text-white bg-dark rounded mx-3">Sign up</div></button>
+      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goLogin()"><div class="text-white bg-dark rounded mx-3">{{signIn | translate}}</div></button>
+      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goRegistration()"><div class="text-white bg-dark rounded mx-3">{{signUp | translate}}</div></button>
     </div>
 
     <div class="main2 font-weight-bold">
-      Set unachievable goals and achieve them. Create an unlimited number of task lists and manage them all at the same time
+      {{homeContent1 | translate}}
     </div>
   </div>
 </div>

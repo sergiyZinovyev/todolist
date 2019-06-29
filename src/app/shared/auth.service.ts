@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   user: string = 'user';
+  lang: string = 'en'
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,6 +24,14 @@ export class AuthService {
       }
     )
     console.log(this.user);
+  }
+
+  getLang(lang){
+    this.lang = lang;
+    
+    this.router.navigate(['']);
+    console.log(this.lang);
+    //this.router.navigate(['/home']);
   }
 
   registrationUser(user) {
