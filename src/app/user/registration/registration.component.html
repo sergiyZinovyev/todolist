@@ -17,14 +17,14 @@
     <form class="example-form" [formGroup]="regForm" (ngSubmit)="registration()">
   
       <mat-form-field class="form-group example-full-width">
-        <input type="email" matInput placeholder="Email" formControlName="email">
+        <input type="email" matInput placeholder="{{'Email' | translate: lang}}" formControlName="email">
       </mat-form-field>
   
       <mat-form-field class="form-group example-full-width">
-        <input type="password" matInput placeholder="Password" formControlName="password">
+        <input type="password" matInput placeholder="{{'Password' | translate: lang}}" formControlName="password">
       </mat-form-field>
       
-      <button mat-stroked-button class="btn-lg btn-block py-2">Registration</button>
+      <button mat-stroked-button class="btn-lg btn-block py-2">{{'Registration' | translate: lang}}</button>
     </form>
   
   </div>

@@ -49,6 +49,14 @@ export class TranslateService {
       id: 'ukr',
       ukr: 'укр'
     },
+    {
+      id: 'Email',
+      ukr: 'Електронна пошта'
+    },
+    {
+      id: 'Password',
+      ukr: 'Пароль'
+    },
   ]
 
 

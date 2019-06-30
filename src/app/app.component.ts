@@ -18,7 +18,7 @@ export class AppComponent {
   ukr = "ukr";
 
   panelOpenState = false;
-  lang = '';
+  lang = this.auth.curentLang;
   
   ngOnInit() {
     this.auth.lang.subscribe({
@@ -44,7 +44,6 @@ export class AppComponent {
 
  myLang(lang){
    this.auth.getLang(lang);
-   this.langMenu = lang;
  }
 
 }

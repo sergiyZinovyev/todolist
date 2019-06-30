@@ -9,6 +9,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  lang = this.auth.curentLang;
+
   constructor(
     private auth: AuthService,
     private fb: FormBuilder
@@ -20,6 +22,11 @@ export class LoginComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.auth.lang.subscribe({
+      next: (value: string) => {
+        this.lang = value;
+      }
+    })
   }
 
   login() {

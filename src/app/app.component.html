@@ -22,7 +22,7 @@
     </div>
 
     <div class="justify-content-end">
-    <button data-toggle="collapse" type="button" class="btn btn-dark mx-0" [matMenuTriggerFor]="menu2">{{langMenu | translate: lang}}</button>
+    <button data-toggle="collapse" type="button" class="btn btn-dark mx-0" [matMenuTriggerFor]="menu2">{{lang | translate: lang}}</button>
     <mat-menu #menu2="matMenu" class="navbar justify-content-start navbar-dark bg-dark shadow-sm">
         <a class="nav-link" mat-button color="warn" (click)="myLang('en')">{{en | translate: lang}}</a><br>
         <a class="nav-link" mat-button color="warn" (click)="myLang('ukr')">{{ukr | translate: lang}}</a>

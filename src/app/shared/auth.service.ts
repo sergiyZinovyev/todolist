@@ -18,6 +18,7 @@ export class AuthService {
   //newLang = 'en';
 
   lang = new Subject();
+  curentLang = 'en';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -35,19 +36,8 @@ export class AuthService {
   }
 
   getLang(lang){
-    //this.newLang = lang;
     this.lang.next(lang);
-    //this.router.navigate(['']);
-    //console.log(this.newLang);
-
-    // this.lang.subscribe({
-    //   next: (value: string) => {
-    //     console.log('next:', value);
-      
-    //     //console.log(this.lang)
-    //   }
-    // })
-    //this.router.navigate(['/home']);
+    this.curentLang = lang;
   }
 
   registrationUser(user) {
