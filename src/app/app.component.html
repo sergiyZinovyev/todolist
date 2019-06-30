@@ -1,26 +1,33 @@
-<header class="navbar navbar-expand-sm justify-content-start navbar-dark bg-dark shadow-sm fixed-top">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" mat-button [matMenuTriggerFor]="menu">
+<header class="navbar navbar-expand-sm justify-content-between navbar-dark bg-dark shadow-sm fixed-top">
+    <div>
+    <button class="navbar-toggler ml-n4" type="button" data-toggle="collapse" mat-button [matMenuTriggerFor]="menu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="navbar-brand my-0 py-0">TO DO IT</div>
-    
+    <div class="navbar-brand my-0 ">TO DO IT</div>
+    </div>
     <mat-menu #menu="matMenu" class="navbar justify-content-start navbar-dark bg-dark shadow-sm">
-        <a class="nav-link active" routerLink="dashboard">Dashboard</a>
-        <a class="nav-link" routerLink="user/login">Login</a>
-        <a class="nav-link" routerLink="user/registration">Registration</a>
-        <a class="nav-link" mat-button color="warn" (click)="logout()">Logout ({{myUser()}})</a>
+        <a class="nav-link active" routerLink="dashboard">{{Dashboard | translate: lang}}</a>
+        <a class="nav-link" routerLink="user/login">{{Login | translate: lang}}</a>
+        <a class="nav-link" routerLink="user/registration">{{Registration | translate: lang}}</a>
+        <a class="nav-link" mat-button color="warn" (click)="logout()">{{Logout | translate: lang}} ({{myUser()}})</a>
         <!-- <span class="text-muted" >{{auth.user}}</span> -->
     </mat-menu>
 
     <div class="collapse navbar-collapse justify-content-end">
-      <a class="nav-link active" routerLink="dashboard">Dashboard</a>
-      <a class="nav-link" routerLink="user/login">Login</a>
-      <a class="nav-link" routerLink="user/registration">Registration</a>
-      <a class="nav-link" mat-button color="warn" (click)="logout()">Logout ({{myUser()}})</a>
+      <a class="nav-link active" routerLink="dashboard">{{Dashboard | translate: lang}}</a>
+      <a class="nav-link" routerLink="user/login">{{Login | translate: lang}}</a>
+      <a class="nav-link" routerLink="user/registration">{{Registration | translate: lang}}</a>
+      <a class="nav-link" mat-button color="warn" (click)="logout()">{{Logout | translate: lang}} ({{myUser()}})</a>
       <!-- <span class="text-muted" >{{auth.user}}</span> -->
     </div>
-    <button (click)="myLang('ukr')">ukr</button>
+
+    <div class="justify-content-end">
+    <button data-toggle="collapse" type="button" class="btn btn-dark mx-0" [matMenuTriggerFor]="menu2">{{langMenu | translate: lang}}</button>
+    <mat-menu #menu2="matMenu" class="navbar justify-content-start navbar-dark bg-dark shadow-sm">
+        <a class="nav-link" mat-button color="warn" (click)="myLang('en')">{{en | translate: lang}}</a><br>
+        <a class="nav-link" mat-button color="warn" (click)="myLang('ukr')">{{ukr | translate: lang}}</a>
+    </mat-menu>
+    </div>
 </header>
 
 

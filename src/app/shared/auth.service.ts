@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Subject, Observable, Observer, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,14 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   user: string = 'user';
-  lang: string = 'en'
+  //lang = new Subject();
+  //lang: string = 'en';
+  // lang = Observable.create((observer: Observer<string>) =>{
+  //   observer.next('en')
+  // })
+  //newLang = 'en';
+
+  lang = new Subject();
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -27,10 +35,18 @@ export class AuthService {
   }
 
   getLang(lang){
-    this.lang = lang;
-    
-    this.router.navigate(['']);
-    console.log(this.lang);
+    //this.newLang = lang;
+    this.lang.next(lang);
+    //this.router.navigate(['']);
+    //console.log(this.newLang);
+
+    // this.lang.subscribe({
+    //   next: (value: string) => {
+    //     console.log('next:', value);
+      
+    //     //console.log(this.lang)
+    //   }
+    // })
     //this.router.navigate(['/home']);
   }
 

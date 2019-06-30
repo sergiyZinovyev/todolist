@@ -9,7 +9,7 @@ import { AuthService } from '../shared/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  lang = this.auth.lang;
+  lang = '';
 
   homeHead: string = 'Achieve the unattainable!';
   homeContent1: string = 'Set unachievable goals and achieve them. Create an unlimited number of task lists and manage them all at the same time';
@@ -22,7 +22,12 @@ export class HomeComponent implements OnInit {
     ) { }
   
   ngOnInit() {
-    console.log(this.lang)
+    this.auth.lang.subscribe({
+      next: (value: string) => {
+        this.lang = value;
+      }
+    })
+    
   }
 
   goLogin(){

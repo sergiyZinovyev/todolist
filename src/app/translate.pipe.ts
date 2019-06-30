@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AuthService } from './shared/auth.service';
+import { TranslateService } from './shared/translate.service';
 
 @Pipe({
   name: 'translate',
@@ -8,19 +8,8 @@ import { AuthService } from './shared/auth.service';
 export class TranslatePipe implements PipeTransform {
 
   constructor(
-    private auth: AuthService, 
+    private value: TranslateService 
   ) {}
-
-  dictionary: {id: string, ukr: string}[] = [
-    {
-      id: 'Achieve the unattainable!',
-      ukr: 'Досягни недосяжне!'
-    },
-    {
-      id: 'Set unachievable goals and achieve them. Create an unlimited number of task lists and manage them all at the same time',
-      ukr: 'Встановюйте недосяжні цілі та досягайте їх. Створюйте необмежену кількість списків завдань та керуйте ними одночасно'
-    }
-  ]
 
   checkArrIdVal(array, val) {
     for (let i: number = 0; i < array.length; i++){
@@ -31,11 +20,11 @@ export class TranslatePipe implements PipeTransform {
     return undefined;
   }
 
-  transform(value) {
-    let id = this.checkArrIdVal(this.dictionary, value);
+  transform(value, arg) {
+    let id = this.checkArrIdVal(this.value.dictionary, value);
     if (id >= 0){
-      if(this.auth.lang == 'ukr'){
-        return this.dictionary[id].ukr;
+      if(arg == 'ukr'){
+        return this.value.dictionary[id].ukr;
       }
       else{return value}
     }

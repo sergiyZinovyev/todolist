@@ -2,15 +2,15 @@
   <div class="container-fluid main">
     <h1 class="text-center display-4 mb-0">TO DO IT</h1>
     <hr class="m-1 divider">
-    <h5 class="text-center">{{homeHead | translate}}</h5>
+    <h5 class="text-center">{{homeHead | translate: lang}}</h5>
 
     <div class="but-m">
-      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goLogin()"><div class="text-white bg-dark rounded mx-3">{{signIn | translate}}</div></button>
-      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goRegistration()"><div class="text-white bg-dark rounded mx-3">{{signUp | translate}}</div></button>
+      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goLogin()"><div class="text-white bg-dark rounded mx-3">{{signIn | translate: lang}}</div></button>
+      <button type="button" class="btn btn-outline-dark btn-block m-3 mybtn" (click)="goRegistration()"><div class="text-white bg-dark rounded mx-3">{{signUp | translate: lang}}</div></button>
     </div>
 
     <div class="main2 font-weight-bold">
-      {{homeContent1 | translate}}
+      {{homeContent1 | translate: lang}}
     </div>
   </div>
 </div>

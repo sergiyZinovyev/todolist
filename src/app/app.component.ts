@@ -8,9 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'todo-firebase';
+
+  langMenu: string = 'en';
+  Dashboard = "Dashboard";
+  Login = "Login";
+  Registration = "Registration";
+  Logout = "Logout";
+  en = "en";
+  ukr = "ukr";
+
   panelOpenState = false;
+  lang = '';
   
+  ngOnInit() {
+    this.auth.lang.subscribe({
+      next: (value: string) => {
+        this.lang = value;
+      }
+    })
+    
+  }
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -25,10 +43,8 @@ export class AppComponent {
  }
 
  myLang(lang){
-
    this.auth.getLang(lang);
-   //this.router.navigate(['/home']);
-   //console.log('test');
+   this.langMenu = lang;
  }
 
 }
