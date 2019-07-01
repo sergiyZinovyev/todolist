@@ -6,38 +6,38 @@
 
         <div *ngIf='!this.newTaskList'>
           <div class="jumbotron">
-            <h1 class="display-4">Start now!</h1>
-            <p class="lead">Create your task lists and add new tasks.</p>
+            <h1 class="display-4">{{'Start now!' | translate: lang}}</h1>
+            <p class="lead">{{'Create your task lists and add new tasks.' | translate: lang}}</p>
             <hr class="my-4">
-            <p>Go to the menu and create your first To-Do.</p>
+            <p>{{'Go to the menu and create your first To-Do.' | translate: lang}}</p>
             <p class="lead">
-              <a mat-stroked-button class="nav-link btn btn-outline-info button-style-1 border-info text-info" (click)="this.changeDone.emit()">Get start</a>
+              <a mat-stroked-button class="nav-link btn btn-outline-info button-style-1 border-info text-info" (click)="this.changeDone.emit()">{{'Get start' | translate: lang}}</a>
             </p>
           </div>
         </div>
 
         <div *ngIf='this.newTaskList'>
           <div class="d-flex justify-content-between"> 
-            <h5 class="m-3 ml-5 text-info">{{this.nameTodo}}</h5>
+            <h5 class="m-3 ml-5 text-info">{{this.nameTodo | translate: lang}}</h5>
 
           
               <div class="position d-block d-sm-none">
-                <button type="button" class="btn btn-outline-info mt-3 mr-2" (click)="visible = !visible">Sort data ↓↑</button>      
+                <button type="button" class="btn btn-outline-info mt-3 mr-2" (click)="visible = !visible">{{'Sort data' | translate: lang}} ↓↑</button>      
                 <div *ngIf="visible" class="color-menu bg-info">
                   <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('name')">
-                    Task {{nameDirect}}
+                    {{'Task' | translate: lang}} {{nameDirect}}
                   </button><hr class="text-white my-0 mx-2">
                   <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nameTodo')">
-                    Todo {{nameTodoDirect}}
+                    {{'Todo' | translate: lang}} {{nameTodoDirect}}
                   </button><hr class="text-white my-0 mx-2">
                   <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nowdate')">
-                    Creation {{nowdateDirect}}
+                    {{'Creation' | translate: lang}} {{nowdateDirect}}
                   </button><hr class="text-white my-0 mx-2">
                   <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('dateOfExecution')">
-                    Execution {{dateOfExecutionDirect}}
+                    {{'Execution' | translate: lang}} {{dateOfExecutionDirect}}
                   </button><hr class="text-white my-0 mx-2">
                   <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('priority')">
-                    Priority {{priorityDirect}}
+                    {{'Priority' | translate: lang}} {{priorityDirect}}
                   </button><hr class="text-white my-0 mx-2"> 
                 </div>
               </div>
@@ -48,31 +48,31 @@
             <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                  <mat-panel-title>Add new task to {{this.nameTodo}} list</mat-panel-title>
+                  <mat-panel-title>{{'Add new task to' | translate: lang}} {{this.nameTodo}} {{'list' | translate: lang}}</mat-panel-title>
                 </mat-expansion-panel-header>
                 <form class="example-form" [formGroup]="myTask" >
                   <mat-form-field class="form-group example-full-width">
-                    <input type="text" matInput required placeholder="name" formControlName="name">
+                    <input type="text" matInput required placeholder="{{'name' | translate: lang}}" formControlName="name">
                   </mat-form-field>
     
                   <mat-accordion>
                     <mat-expansion-panel class='mx-n4 mb-2 mt-n4 border-0 shadow-none'>
                       <mat-expansion-panel-header>
-                        <mat-panel-title class='text-info'>more settings...</mat-panel-title>
+                        <mat-panel-title class='text-info'>{{'more settings...' | translate: lang}}</mat-panel-title>
                       </mat-expansion-panel-header>
                       <mat-form-field class="form-group example-full-width">
-                        <input type="date" matInput placeholder="date of execution" formControlName="dateOfExecution">
+                        <input type="date" matInput placeholder="{{'date of execution' | translate: lang}}" formControlName="dateOfExecution">
                       </mat-form-field>
                       <mat-form-field class="form-group example-full-width">
-                          <mat-label>priority</mat-label>
+                          <mat-label>{{'priority' | translate: lang}}</mat-label>
                           <select matNativeControl formControlName="priority">
-                            <option value=1>High</option>
-                            <option value=2>Normal</option>
-                            <option value=3>Low</option>
+                            <option value=1>{{'High' | translate: lang}}</option>
+                            <option value=2>{{'Normal' | translate: lang}}</option>
+                            <option value=3>{{'Low' | translate: lang}}</option>
                           </select>
                       </mat-form-field>
                       <mat-form-field class="form-group example-full-width">
-                        <textarea matInput placeholder="discription" formControlName="discription"></textarea>
+                        <textarea matInput placeholder="{{'discription' | translate: lang}}" formControlName="discription"></textarea>
                       </mat-form-field>
                       <input type="hidden" formControlName="done">
                       <input type="hidden" formControlName="nowdate">
@@ -80,7 +80,7 @@
                     </mat-expansion-panel>
                   </mat-accordion>
     
-                  <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">Add task</button>
+                  <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">{{'Add task' | translate: lang}}</button>
                 </form>
               </mat-expansion-panel>
             </mat-accordion>
@@ -96,19 +96,19 @@
             <div class="row mx-3 text-info mb-n4">
               
               <div class="col-12 col-sm-9 col-md-5 col-lg-5">
-                <div class="ml-3"><strong class="cursorPointer" (click) = "changeFiltr('name')">Task {{nameDirect}}</strong></div>
+                <div class="ml-3"><strong class="cursorPointer" (click) = "changeFiltr('name')">{{'Task' | translate: lang}} {{nameDirect}}</strong></div>
               </div>
 
               <div class="d-none d-md-block col-md-5 col-lg-5">
-                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nameTodo')">Todo {{nameTodoDirect}}</strong></div>
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nameTodo')">{{'Todo' | translate: lang}} {{nameTodoDirect}}</strong></div>
               </div>
 
               <div class="d-none d-lg-block col-lg-1">
-                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nowdate')">Creation {{nowdateDirect}}</strong></div>
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('nowdate')">{{'Creation' | translate: lang}} {{nowdateDirect}}</strong></div>
               </div>
 
               <div class="d-none d-sm-block col-sm-3 col-md-2 col-lg-1">
-                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('dateOfExecution')">Execution {{dateOfExecutionDirect}}</strong></div>
+                <div class=""><strong class="cursorPointer" (click) = "changeFiltr('dateOfExecution')">{{'Execution' | translate: lang}} {{dateOfExecutionDirect}}</strong></div>
               </div>
             </div>
             <mat-divider class="border-bottom border-info mt-4 mx-1 shadow-sm"></mat-divider>
@@ -122,42 +122,5 @@
           <mat-divider class="border-bottom border-info mx-1 shadow-sm"></mat-divider>
         </div>
       </div>
-
-      <!-- -------------------------------------------------------side task list component START----------------------------------------------------------------- -->
-      <!-- <div class="d-none d-sm-block col-sm-4">
-        <app-sidetask></app-sidetask>
-        
-        <div *ngIf='this.nameTask'>
-          <h3 class="m-3">{{this.newTask.name}}</h3>
-          <div class="mx-3">
-            <h6 class="text-primary mt-1">date of creation:</h6>
-            <p>{{this.newTask.nowdate}}</p>
-            <mat-divider></mat-divider>
-  
-            <h6 class="text-primary mt-1">date of execution:</h6>
-            <p>{{this.newTask.dateOfExecution}}</p>
-            <mat-divider></mat-divider>
-  
-            <h6 class="text-primary mt-1">priority:</h6>
-            <p>{{this.newTask.priority}}</p>
-            <mat-divider></mat-divider>
-  
-            <h6 class="text-primary mt-1">discription:</h6>
-            <p>{{this.newTask.discription}}</p>
-            <mat-divider></mat-divider>
-  
-            <h6 class="text-primary mt-1">done:</h6>
-            <p>{{this.newTask.done}}</p>
-            <mat-divider></mat-divider>
-  
-            <div class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-secondary">Edit</button>
-              <button type="button" class="btn btn-secondary" (click)="delTask(this.newTask.name)">Delete</button>
-            </div>
-          </div>
-        </div>
-        
-      </div> -->
-       <!-- -------------------------------------------------------side task list component END----------------------------------------------------------------- -->
     </div>
   </div>

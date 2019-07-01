@@ -19,6 +19,8 @@ export class AuthService {
 
   lang = new Subject();
   curentLang = 'en';
+  errorMessage = '';
+  
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -51,7 +53,11 @@ export class AuthService {
         )
         this.router.navigate(['/dashboard']);
       } )
-      .catch( er => console.log(er))
+      .catch( er => {
+        console.log(er);
+        console.log(er.message);
+        this.errorMessage = er.message;
+      })
   }
 
   loginUser(user) {

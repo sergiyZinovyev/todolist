@@ -7,47 +7,47 @@
     
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
-      <h3 class="m-3 ml-5">List of ToDo</h3>
+      <h3 class="m-3 ml-5">{{'List of ToDo' | translate: lang}}</h3>
 
       <div class="mx-3">
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>Add new ToDo</mat-panel-title>
+              <mat-panel-title>{{'Add new ToDo' | translate: lang}}</mat-panel-title>
             </mat-expansion-panel-header>
             <form class="example-form" [formGroup]="myForm" >
               <mat-form-field class="form-group example-full-width">
-                <input type="text" matInput placeholder="name" formControlName="name">
+                <input type="text" matInput placeholder="{{'name' | translate: lang}}" formControlName="name">
               </mat-form-field>
               <mat-form-field class="form-group example-full-width">
                 <!-- <input type="color" matInput placeholder="color" formControlName="color"> -->
-                <input type="color" (list)="colorList" matInput placeholder="color" formControlName="color">
+                <input type="color" (list)="colorList" matInput placeholder="{{'color' | translate: lang}}" formControlName="color">
                 <datalist #colorList>
                   <option value="#ff0000" label="Red">
                   <option value="#008000" label="Green">
                   <option value="#0000ff" label="Blue">
                 </datalist>
               </mat-form-field>
-              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">Add todo</button>
+              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">{{'Add todo' | translate: lang}}</button>
             </form>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
 
       <div class="m-3">
-        <button class="btn btn-info btn-block" (click)="getAllTodoList(); snav.toggle()"><strong>Get all To-Do</strong></button>
+        <button class="btn btn-info btn-block" (click)="getAllTodoList(); snav.toggle()"><strong>{{'Get all To-Do' | translate: lang}}</strong></button>
       </div>
 
       <mat-list class="m-3" *ngFor="let x of newTodoList; let i = index">          
         <div class="flex-space-between mb-1" >
-          <a class="nav-link" [ngStyle]='{"background-color": x.color}' mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name}}</strong></a>
+          <a class="nav-link" [ngStyle]='{"background-color": x.color}' mat-button (click)="getList(x.name); snav.toggle()"><strong>{{x.name | translate: lang}}</strong></a>
           <div class="position">
-            <button mat-stroked-button class="btn-lg button-style-1 mr-1" mat-button (click)="i = (i+1)*-1; getCurrentColor(x.name)">color</button>      
+            <button mat-stroked-button class="btn-lg button-style-1 mr-1" mat-button (click)="i = (i+1)*-1; getCurrentColor(x.name)">{{'color' | translate: lang}}</button>      
               <div *ngIf="!(i >= 0)" class="color-menu">
                 <input type="color" class="btn-lg button-style-1 p-0" [(ngModel)]="newColor"><br>
-                <button mat-stroked-button class="btn-lg button-style-1" (click)="editList(x.name); i = (i+1)*-1">Edit</button>
+                <button mat-stroked-button class="btn-lg button-style-1" (click)="editList(x.name); i = (i+1)*-1">{{'Edit' | translate: lang}}</button>
               </div>
-            <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">Delete</button>
+            <button mat-stroked-button class="btn-lg button-style-1" (click)="delList(x.name)">{{'Delete' | translate: lang}}</button>
           </div>
         </div>          
         <mat-divider></mat-divider>

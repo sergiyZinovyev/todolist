@@ -6,19 +6,19 @@
     <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2">
 
           <div class="col-12 col-sm-9 col-md-5 col-lg-5">
-              <div class="ml-3"><strong [ngClass]="taskDone">{{this.task.name}}</strong></div>
+              <div class="ml-3"><strong [ngClass]="taskDone">{{this.task.name | translate: lang}}</strong></div>
           </div>
 
           <div class="boarder d-none d-md-block col-md-5 col-lg-5">
-              <div class=""><strong [ngClass]="taskDone">{{this.task.nameTodo}}</strong></div>
+              <div class=""><strong [ngClass]="taskDone">{{this.task.nameTodo | translate: lang}}</strong></div>
           </div>
 
           <div class="boarder d-none d-lg-block col-lg-1">
-            <div class=""><strong [ngClass]="taskDone">{{this.task.nowdate}}</strong></div>
+            <div class=""><strong [ngClass]="taskDone">{{this.task.nowdate | translate: lang}}</strong></div>
           </div>
 
           <div class="boarder d-none d-sm-block col-sm-3 col-md-2 col-lg-1">
-              <div class=""><strong [ngClass]="taskDone">{{this.task.dateOfExecution}}</strong></div>
+              <div class=""><strong [ngClass]="taskDone">{{this.task.dateOfExecution | translate: lang}}</strong></div>
           </div>
 
     </mat-expansion-panel-header>
@@ -26,33 +26,33 @@
     <div class="p-3 mb-2 text-white" [ngStyle] = '{"background-color": this.task.color}'>
       <form class="example-form" [formGroup]="myTask" >
         <mat-form-field class="form-group example-full-width">
-          <input type="text" matInput placeholder="date of creation" formControlName="nowdate">
+          <input type="text" matInput placeholder="{{'date of creation' | translate: lang}}" formControlName="nowdate">
         </mat-form-field>
         <mat-form-field class="form-group example-full-width">
-          <input type="text" matInput placeholder="date of execution" formControlName="dateOfExecution">
+          <input type="text" matInput placeholder="{{'date of execution' | translate: lang}}" formControlName="dateOfExecution">
         </mat-form-field>
         <mat-form-field class="form-group example-full-width">
-          <mat-label>priority</mat-label>
+          <mat-label>{{'priority' | translate: lang}}</mat-label>
           <select matNativeControl formControlName="priority">
-            <option value=1>High</option>
-            <option value=2>Normal</option>
-            <option value=3>Low</option>
+            <option value=1>{{'High' | translate: lang}}</option>
+            <option value=2>{{'Normal' | translate: lang}}</option>
+            <option value=3>{{'Low' | translate: lang}}</option>
           </select>
         </mat-form-field>
         <mat-form-field class="form-group example-full-width">
-          <textarea matInput placeholder="discription" formControlName="discription"></textarea>
+          <textarea matInput placeholder="{{'discription' | translate: lang}}" formControlName="discription"></textarea>
         </mat-form-field>
         <mat-form-field class="form-group example-full-width">
-          <mat-label>done</mat-label>
+          <mat-label>{{'done' | translate: lang}}</mat-label>
           <select matNativeControl formControlName="done">
-            <option value=true>true</option>
-            <option value=false>false</option>
+            <option value=true>{{'true' | translate: lang}}</option>
+            <option value=false>{{'false' | translate: lang}}</option>
           </select>
         </mat-form-field> 
       </form>
       <div *ngIf="this.nameTodo != 'All tasks'" class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary" (click)="addTask()">Edit</button>
-        <button type="button" class="btn btn-secondary" (click)="delTask(this.task.name)">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="addTask()">{{'Edit' | translate: lang}}</button>
+        <button type="button" class="btn btn-secondary" (click)="delTask(this.task.name)">{{'Delete' | translate: lang}}</button>
       </div> 
     </div>
 

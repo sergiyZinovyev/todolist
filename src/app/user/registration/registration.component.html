@@ -1,30 +1,26 @@
-<!-- <div class="d-flex align-items-center justify-content-center vh-100">
-  <div class="col-6">
-    <form class="example-form" [formGroup]="regForm" (ngSubmit)="registration()">
-      <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" formControlName="password">
-      </div>
-      <button class="btn btn-primary">Registration</button>
-    </form>
-  </div>
-</div> -->
 
 <div class="d-flex align-items-center justify-content-center vh-100 m-3">
   
-    <form class="example-form" [formGroup]="regForm" (ngSubmit)="registration()">
+  <form class="example-form" [formGroup]="regForm" (ngSubmit)="registration()">
+
+    <mat-form-field class="form-group example-full-width">
+      <input type="email" matInput placeholder="{{'Email' | translate: lang}}" formControlName="email">
+      <mat-error *ngIf="!regForm.get('email').valid">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group example-full-width">
+      <input type="password" matInput placeholder="{{'Password' | translate: lang}}" formControlName="password">
+      <mat-hint>Password must contain at least one letter, at least one number, and be longer than six characters</mat-hint>
+      <mat-error *ngIf="!regForm.get('password').valid">
+        Please enter a valid password (password must contain at least one letter, at least one number, and be longer than six characters)
+      </mat-error>
+    </mat-form-field>
+    
+    <button mat-stroked-button class="btn-lg btn-block py-2 mt-3">{{'Registration' | translate: lang}}</button>
+    <br><div *ngIf='auth.errorMessage' class="alert alert-danger mt-3" role="alert">{{auth.errorMessage}}</div>
+  </form>
   
-      <mat-form-field class="form-group example-full-width">
-        <input type="email" matInput placeholder="{{'Email' | translate: lang}}" formControlName="email">
-      </mat-form-field>
+</div>
   
-      <mat-form-field class="form-group example-full-width">
-        <input type="password" matInput placeholder="{{'Password' | translate: lang}}" formControlName="password">
-      </mat-form-field>
-      
-      <button mat-stroked-button class="btn-lg btn-block py-2">{{'Registration' | translate: lang}}</button>
-    </form>
-  
-  </div>

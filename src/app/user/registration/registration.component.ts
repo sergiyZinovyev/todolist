@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm, FormGroup } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-registration',
@@ -10,15 +19,19 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RegistrationComponent implements OnInit {
 
   lang = this.auth.curentLang;
+  matcher = new MyErrorStateMatcher();
+  
+  //errorMessage = this.auth.errorMessage;
+  errorMessage = 'errorMessage';
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private fb: FormBuilder
   ) { }
 
-  regForm = this.fb.group({
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.required]]
+  regForm = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required])
   })
 
   ngOnInit() {
@@ -27,11 +40,17 @@ export class RegistrationComponent implements OnInit {
         this.lang = value;
       }
     })
+    //this.errorMessage = ''
   }
 
   registration() {
     console.log(this.regForm.value);
-    this.auth.registrationUser(this.regForm.value);
+    if(this.regForm.valid){
+      this.auth.registrationUser(this.regForm.value);
+      this.errorMessage = this.auth.errorMessage;
+      console.log(this.auth.errorMessage)
+    }
+    
   }
 
 }

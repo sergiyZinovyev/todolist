@@ -21,6 +21,7 @@ export class TaskComponent implements OnInit {
 
   myTask: any;
   
+  lang = this.auth.curentLang;
 
   constructor(
     private auth: AuthService,
@@ -55,6 +56,12 @@ export class TaskComponent implements OnInit {
   // console.log(this.task.priority);
   // console.log(this.myclass);
   console.log(this.nameTodo);
+
+  this.auth.lang.subscribe({
+    next: (value: string) => {
+      this.lang = value;
+    }
+  })
   }
 
 

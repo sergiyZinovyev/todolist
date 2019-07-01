@@ -33,6 +33,8 @@ export class TodoComponent implements OnInit {
     direct: "asc"
   }
 
+  lang = this.auth.curentLang;
+
   nameDirect;
   dateOfExecutionDirect;
   priorityDirect;
@@ -62,6 +64,12 @@ export class TodoComponent implements OnInit {
       nowdate: [this.getCurentDate(), [Validators.required]],
       nameTodo: [this.getNameTodo(), [Validators.required]],
       color: [this.color, [Validators.required]]
+    })
+
+    this.auth.lang.subscribe({
+      next: (value: string) => {
+        this.lang = value;
+      }
     })
     
   }

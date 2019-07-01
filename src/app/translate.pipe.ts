@@ -8,7 +8,7 @@ import { TranslateService } from './shared/translate.service';
 export class TranslatePipe implements PipeTransform {
 
   constructor(
-    private value: TranslateService 
+    private translate: TranslateService
   ) {}
 
   checkArrIdVal(array, val) {
@@ -21,10 +21,10 @@ export class TranslatePipe implements PipeTransform {
   }
 
   transform(value, arg) {
-    let id = this.checkArrIdVal(this.value.dictionary, value);
+    let id = this.checkArrIdVal(this.translate.dictionary, value);
     if (id >= 0){
       if(arg == 'ukr'){
-        return this.value.dictionary[id].ukr;
+        return this.translate.dictionary[id].ukr;
       }
       else{return value}
     }

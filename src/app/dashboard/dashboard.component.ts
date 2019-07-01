@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   newColor = '#ccf2ff';
   isShown: boolean = false;
   
-
+  lang = this.auth.curentLang;
 
   constructor(
     private auth: AuthService,
@@ -54,6 +54,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     console.log('dashboard user = '+this.auth.user);
 
+    this.auth.lang.subscribe({
+      next: (value: string) => {
+        this.lang = value;
+      }
+    })
     
   }
 
