@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 1700px)');
+    this.mobileQuery = media.matchMedia('(max-width: 1600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     

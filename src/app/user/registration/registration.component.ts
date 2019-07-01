@@ -1,13 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/auth.service';
-import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm, FormGroup, AbstractControl} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+// export class MyErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     const isSubmitted = form && form.submitted;
+//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+//   }
+// }
+
+function passwordConfirming(c: AbstractControl): any {
+  if(!c.parent || !c) return;
+  const pwd = c.parent.get('password');
+  const cpwd = c.parent.get('confirmPassword');
+
+  if(!pwd || !cpwd) return ;
+  if (pwd.value !== cpwd.value) {
+      return { invalid: true };
   }
 }
 
@@ -19,10 +30,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegistrationComponent implements OnInit {
 
   lang = this.auth.curentLang;
-  matcher = new MyErrorStateMatcher();
+  //matcher = new MyErrorStateMatcher();
   
   //errorMessage = this.auth.errorMessage;
-  errorMessage = 'errorMessage';
+  errorMessage: boolean = false;
 
   constructor(
     public auth: AuthService,
@@ -31,7 +42,8 @@ export class RegistrationComponent implements OnInit {
 
   regForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$")]),
+    confirmPassword: new FormControl('', [Validators.required, passwordConfirming])
   })
 
   ngOnInit() {
@@ -40,14 +52,14 @@ export class RegistrationComponent implements OnInit {
         this.lang = value;
       }
     })
-    //this.errorMessage = ''
+    this.regForm.controls['password'].valueChanges.subscribe((value) => this.regForm.controls['confirmPassword'].setValue('')) 
   }
 
   registration() {
     console.log(this.regForm.value);
     if(this.regForm.valid){
       this.auth.registrationUser(this.regForm.value);
-      this.errorMessage = this.auth.errorMessage;
+      this.errorMessage = true;
       console.log(this.auth.errorMessage)
     }
     

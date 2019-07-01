@@ -17,9 +17,16 @@
         Please enter a valid password (password must contain at least one letter, at least one number, and be longer than six characters)
       </mat-error>
     </mat-form-field>
+
+    <mat-form-field class="form-group example-full-width">
+      <input type="password" matInput placeholder="{{'Confirm Password' | translate: lang}}" formControlName="confirmPassword">
+      <mat-error *ngIf="!regForm.get('confirmPassword').valid">
+        password does not match
+      </mat-error>
+    </mat-form-field>
     
     <button mat-stroked-button class="btn-lg btn-block py-2 mt-3">{{'Registration' | translate: lang}}</button>
-    <br><div *ngIf='auth.errorMessage' class="alert alert-danger mt-3" role="alert">{{auth.errorMessage}}</div>
+    <br><div *ngIf='errorMessage' class="alert alert-danger mt-3" role="alert">{{auth.errorMessage}}</div>
   </form>
   
 </div>
