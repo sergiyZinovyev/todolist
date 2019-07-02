@@ -74,6 +74,7 @@ export class AuthService {
   }
 
   loginUser(user) {
+    this.errorMessage2 = '';
     this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then( user => {
         console.log(user);
