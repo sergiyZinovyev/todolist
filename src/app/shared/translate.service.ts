@@ -178,11 +178,56 @@ export class TranslateService {
       ukr: 'Отримати всі завдання'
     },
     {
+      id: 'Add',
+      ukr: 'Додати'
+    },
+    {
       id: 'Add new ToDo',
       ukr: 'Додати новий список завдань'
-    }
+    },
+    {
+      id: 'The password is invalid or the user does not have a password.',
+      ukr: 'Пароль недійсний або користувач не має пароля.'
+    },
+    {
+      id: 'There is no user record corresponding to this identifier. The user may have been deleted.',
+      ukr: 'Не існує користувача з такою електронною поштою. Або користувач може бути видалений.'
+    },
+    {
+      id: 'Please enter a valid email address',
+      ukr: 'Будь ласка, введіть дійсну адресу електронної пошти'
+    },
+    {
+      id: 'Please enter a password',
+      ukr: 'Введіть пароль'
+    },
+    {
+      id: 'Confirm Password',
+      ukr: 'Підтвердіть пароль'
+    },
+    {
+      id: 'password does not match',
+      ukr: 'пароль не співпадає'
+    },
+    {
+      id: 'Password must contain at least one letter, at least one number, and be longer than six characters',
+      ukr: 'Пароль має містити хочаб одну одну цифру та одну літеру та бути довшим за шість символів'
+    },
+    {
+      id: 'Please enter a valid password',
+      ukr: 'Будь ласка задайте правельний пароль'
+    },
+    {
+      id: 'The email address is already in use by another account.',
+      ukr: 'Адреса електронної пошти вже використовується іншим обліковим записом.'
+    },
+    {
+      id: 'The email address is badly formatted.',
+      ukr: 'Такої адреси електронної пошти не існує'
+    },
+
   ]
 
 
-
+  
 }

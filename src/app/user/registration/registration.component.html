@@ -1,32 +1,37 @@
 
-<div class="d-flex align-items-center justify-content-center vh-100 m-3">
+<div class="d-flex align-items-center justify-content-center vh-100 mt-n5">
   
-  <form class="example-form" [formGroup]="regForm" (ngSubmit)="registration()">
+  <form class="example-form back2 mt-n5" [formGroup]="regForm" (ngSubmit)="registration()">
 
     <mat-form-field class="form-group example-full-width">
       <input type="email" matInput placeholder="{{'Email' | translate: lang}}" formControlName="email">
       <mat-error *ngIf="!regForm.get('email').valid">
-        Please enter a valid email address
+        {{'Please enter a valid email address' | translate: lang}}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group example-full-width">
       <input type="password" matInput placeholder="{{'Password' | translate: lang}}" formControlName="password">
-      <mat-hint>Password must contain at least one letter, at least one number, and be longer than six characters</mat-hint>
+      <mat-hint>{{'Password must contain at least one letter, at least one number, and be longer than six characters' | translate: lang}}</mat-hint>
       <mat-error *ngIf="!regForm.get('password').valid">
-        Please enter a valid password (password must contain at least one letter, at least one number, and be longer than six characters)
+        {{'Please enter a valid password' | translate: lang}}
+         ({{'Password must contain at least one letter, at least one number, and be longer than six characters' | translate: lang}})
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group example-full-width">
       <input type="password" matInput placeholder="{{'Confirm Password' | translate: lang}}" formControlName="confirmPassword">
       <mat-error *ngIf="!regForm.get('confirmPassword').valid">
-        password does not match
+        {{'password does not match' | translate: lang}}
       </mat-error>
     </mat-form-field>
+
+    <!-- <mat-form-field class="form-group example-full-width">
+      <re-captcha formControlName="recaptchaReactive"></re-captcha>
+    </mat-form-field> -->
     
     <button mat-stroked-button class="btn-lg btn-block py-2 mt-3">{{'Registration' | translate: lang}}</button>
-    <br><div *ngIf='errorMessage' class="alert alert-danger mt-3" role="alert">{{auth.errorMessage}}</div>
+    <br><div *ngIf='errorMessage' class="alert alert-danger mt-3 max-width" role="alert">{{info.errorMessage | translate: lang}}</div>
   </form>
   
 </div>

@@ -20,7 +20,7 @@ export class AuthService {
   lang = new Subject();
   curentLang = 'en';
   errorMessage = '';
-  
+  errorMessage2 = '';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -58,6 +58,19 @@ export class AuthService {
         console.log(er.message);
         this.errorMessage = er.message;
       })
+      
+      
+  
+      // this.afAuth.auth.currentUser.sendEmailVerification()
+      // .then(function() {
+      //   console.log("send: work");
+      // })
+      // .catch(er => {
+      //   console.log(er);
+      //   console.log(er.message);
+      //   //this.errorMessage = er.message;
+      // });
+      
   }
 
   loginUser(user) {
@@ -71,7 +84,10 @@ export class AuthService {
         )
         this.router.navigate(['/dashboard']);
       })
-      .catch( er => console.log(er))
+      .catch( er => {
+        console.log(er);
+        this.errorMessage2 = er.message;
+      })
   }
 
   logout() {

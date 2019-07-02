@@ -72,6 +72,10 @@ import { SidetaskComponent } from './dashboard/todo/sidetask/sidetask.component'
 import { FiltrPipe } from './filtr.pipe';
 import { TranslatePipe } from './translate.pipe';
 
+// import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+// import { RecaptchaModule } from 'ng-recaptcha';
+// import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
+
 
 
 
@@ -147,12 +151,15 @@ import { TranslatePipe } from './translate.pipe';
     PortalModule,
     ScrollingModule,
 
-    FormsModule
+    FormsModule,
 
+    //RecaptchaV3Module,
+    
     
   ],
   providers: [
-    AngularFireAuthGuard
+    AngularFireAuthGuard,
+    //{ provide: RECAPTCHA_V3_SITE_KEY, useValue: 'AIzaSyBQai9FXb0FBm9OQZkD-31Ju4xMEZWBj2k' }
   ],
   bootstrap: [AppComponent]
 })

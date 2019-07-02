@@ -1,16 +1,23 @@
-<div class="d-flex align-items-center justify-content-center vh-100 m-3">
+<div class="d-flex align-items-center justify-content-center vh-100  mt-n5">
   
-  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
+  <form class="example-form back2 mt-n5" [formGroup]="loginForm" (ngSubmit)="login()">
 
     <mat-form-field class="form-group example-full-width">
       <input type="email" matInput placeholder="{{'Email' | translate: lang}}" formControlName="email">
+      <mat-error *ngIf="!loginForm.get('email').valid">
+        {{'Please enter a valid email address' | translate: lang}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group example-full-width">
       <input type="password" matInput placeholder="{{'Password' | translate: lang}}" formControlName="password">
+      <mat-error *ngIf="!loginForm.get('password').valid">
+        {{'Please enter a password' | translate: lang}}
+      </mat-error>
     </mat-form-field>
     
     <button mat-stroked-button class="btn-lg btn-block py-2">{{'Login' | translate: lang}}</button>
+    <br><div *ngIf='errorMessage' class="alert alert-danger mt-3  max-width" role="alert">{{info.errorMessage2 | translate: lang}}</div>
   </form>
 
 </div>

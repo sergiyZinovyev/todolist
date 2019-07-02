@@ -3,14 +3,6 @@ import { AuthService } from '../../shared/auth.service';
 import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm, FormGroup, AbstractControl} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
-
-// export class MyErrorStateMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     const isSubmitted = form && form.submitted;
-//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-//   }
-// }
-
 function passwordConfirming(c: AbstractControl): any {
   if(!c.parent || !c) return;
   const pwd = c.parent.get('password');
@@ -30,20 +22,19 @@ function passwordConfirming(c: AbstractControl): any {
 export class RegistrationComponent implements OnInit {
 
   lang = this.auth.curentLang;
-  //matcher = new MyErrorStateMatcher();
-  
-  //errorMessage = this.auth.errorMessage;
   errorMessage: boolean = false;
 
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
+    public info: AuthService,
     private fb: FormBuilder
   ) { }
 
   regForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$")]),
-    confirmPassword: new FormControl('', [Validators.required, passwordConfirming])
+    confirmPassword: new FormControl('', [Validators.required, passwordConfirming]),
+    //recaptchaReactive: new FormControl(null, Validators.required)
   })
 
   ngOnInit() {
@@ -56,11 +47,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   registration() {
-    console.log(this.regForm.value);
+    //console.log(this.regForm.value);
     if(this.regForm.valid){
       this.auth.registrationUser(this.regForm.value);
       this.errorMessage = true;
-      console.log(this.auth.errorMessage)
+      //console.log(this.auth.errorMessage)
     }
     
   }

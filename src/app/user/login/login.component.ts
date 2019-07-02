@@ -10,9 +10,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   lang = this.auth.curentLang;
+  errorMessage: boolean = false;
 
   constructor(
     private auth: AuthService,
+    public info: AuthService,
     private fb: FormBuilder
   ) { }
 
@@ -30,6 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.loginUser(this.loginForm.value);
+    if(this.loginForm.valid){
+      this.auth.loginUser(this.loginForm.value);
+      this.errorMessage = true;
+      //console.log(this.auth.errorMessage)
+    } 
   }
 }

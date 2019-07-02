@@ -1,3 +1,13 @@
 .example-full-width {
     width: 100%;
   }
+.max-width{
+  max-width: 650px;
+  margin: auto;
+}
+.back2{
+  background-color: rgba(255, 255, 255, 0.9); /*напівпрозорий фон*/
+  box-shadow: 0px 0px 70px 55px rgba(255,255,255,1); /*розмита тінь*/
+  padding: 10px;
+  border-radius: 0px; 
+}
