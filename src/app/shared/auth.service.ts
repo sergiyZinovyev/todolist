@@ -90,6 +90,10 @@ export class AuthService {
       })
   }
 
+  configErrorMess2(){
+    this.errorMessage2 = '';
+  }
+
   logout() {
     this.afAuth.auth.signOut().then(
       _ => {

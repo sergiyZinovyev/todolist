@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   lang = this.auth.curentLang;
   errorMessage: boolean = false;
+  getSpinner: boolean = false;
+  
 
   constructor(
     private auth: AuthService,
@@ -35,7 +37,10 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.auth.loginUser(this.loginForm.value);
       this.errorMessage = true;
+      this.getSpinner = true;
       //console.log(this.auth.errorMessage)
+      
     } 
   }
+
 }

@@ -72,6 +72,8 @@ import { SidetaskComponent } from './dashboard/todo/sidetask/sidetask.component'
 import { FiltrPipe } from './filtr.pipe';
 import { TranslatePipe } from './translate.pipe';
 
+
+
 // import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 // import { RecaptchaModule } from 'ng-recaptcha';
 // import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
@@ -150,6 +152,7 @@ import { TranslatePipe } from './translate.pipe';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+   
 
     FormsModule,
 
