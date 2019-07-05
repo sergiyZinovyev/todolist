@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit {
 
   lang = this.auth.curentLang;
   errorMessage: boolean = false;
+  getSpinner: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -47,8 +48,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   registration() {
-    //console.log(this.regForm.value);
     if(this.regForm.valid){
+      this.getSpinner = true;
       this.auth.registrationUser(this.regForm.value);
       this.errorMessage = true;
       //console.log(this.auth.errorMessage)

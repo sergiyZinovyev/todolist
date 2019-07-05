@@ -48,8 +48,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let userDoc = this.afs.doc('users/'+this.auth.user);
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
-      console.log('dashboard.component/ngOInit/this.newTodoList = '+this.newTodoList);
-      this.getAllTodoList();
+      console.log('dashboard.component/ngOInit/this.newTodoList = ', this.newTodoList);
+      if(this.newTodoList){this.getAllTodoList();}
+      
     });
 
     console.log('dashboard user = '+this.auth.user);

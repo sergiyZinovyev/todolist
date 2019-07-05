@@ -31,7 +31,13 @@
     </mat-form-field> -->
     
     <button mat-stroked-button class="btn-lg btn-block py-2 mt-3">{{'Registration' | translate: lang}}</button>
-    <br><div *ngIf='errorMessage' class="alert alert-danger mt-3 max-width" role="alert">{{info.errorMessage | translate: lang}}</div>
+    <br>
+    <div *ngIf='getSpinner && !info.errorMessage' class="d-flex justify-content-center mt-5">
+      <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <br><div *ngIf='errorMessage && info.errorMessage' class="alert alert-danger mt-3 max-width" role="alert">{{info.errorMessage | translate: lang}}</div>
   </form>
   
 </div>

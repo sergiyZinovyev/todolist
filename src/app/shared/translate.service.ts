@@ -225,9 +225,14 @@ export class TranslateService {
       id: 'The email address is badly formatted.',
       ukr: 'Такої адреси електронної пошти не існує'
     },
+    {
+      id: 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.',
+      ukr: "Сталася помилка мережі (наприклад, час очікування, перерване з'єднання або недоступний хост)"
+    }
 
   ]
 
 
   
 }
+

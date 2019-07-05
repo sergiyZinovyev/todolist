@@ -35,9 +35,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(this.loginForm.valid){
+      this.getSpinner = true;
       this.auth.loginUser(this.loginForm.value);
       this.errorMessage = true;
-      this.getSpinner = true;
+      
       //console.log(this.auth.errorMessage)
       
     } 
