@@ -30,8 +30,9 @@ export class AuthService {
     this.afAuth.authState.subscribe(
       user => {
         console.log(user);
-        console.log(user.email);
-        this.user = user.email;
+        //console.log(user.email);
+        if(user != null){this.user = user.email;}
+        
       }
     )
     console.log(this.user);
@@ -58,27 +59,14 @@ export class AuthService {
         console.log(er);
         console.log(er.message);
         this.errorMessage = er.message;
-      })
-      
-      
-  
-      // this.afAuth.auth.currentUser.sendEmailVerification()
-      // .then(function() {
-      //   console.log("send: work");
-      // })
-      // .catch(er => {
-      //   console.log(er);
-      //   console.log(er.message);
-      //   //this.errorMessage = er.message;
-      // });
-      
+      })   
   }
 
   loginUser(user) {
     this.errorMessage2 = '';
     this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then( user => {
-        console.log(user);
+        console.log('loginUser(user): ',user);
         this.afAuth.authState.subscribe(
           user => {
             this.user = user.email;

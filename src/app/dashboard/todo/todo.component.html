@@ -4,7 +4,14 @@
   
       <div class="col-12 col-sm-12 vertical-divider">
 
-        <div *ngIf='!this.newTaskList'>
+
+        <div *ngIf='this.spinVisible' class="d-flex justify-content-center mt-5">
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div *ngIf='!this.newTaskList && !this.spinVisible'>
           <div class="jumbotron">
             <h1 class="display-4">{{'Start now!' | translate: lang}}</h1>
             <p class="lead">{{'Create your task lists and add new tasks.' | translate: lang}}</p>

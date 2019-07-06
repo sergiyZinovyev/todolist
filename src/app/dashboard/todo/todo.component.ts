@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 import { AuthService } from '../../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subject, Observable, Observer, of } from 'rxjs';
 
 
 
@@ -17,11 +18,13 @@ export class TodoComponent implements OnInit {
   @Input() newTaskList: any;
   @Input() nameTodo: string;
   @Input() color: string;
+  @Input() newTodoList2;
 
   visible = false;
   nameTask: string;
   newTask: any;
   myTask: any;
+  spinVisible: boolean = true;
 
   filtrParam: {column: string, direct: string} = {
     column: "dateOfExecution",
@@ -71,14 +74,16 @@ export class TodoComponent implements OnInit {
         this.lang = value;
       }
     })
-    
+   
+    this.newTodoList2.subscribe({
+      next: (value: string) => {
+        console.log('value: ',value)
+        if(value){this.spinVisible = false;}
+      }
+    })
+
   }
 
-  // ngOnChanges(){
-  //   this.myTaskList = this.newTaskList;
-  //   console.log(' ngOnChanges/this.newTaskList ='+ this.newTaskList);
-  // }
-  
   get name() {return this.myTask.get('name')}
   get dateOfExecution() {return this.myTask.get('dateOfExecution')}
   get priority() {return this.myTask.get('priority')}

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, concat } from 'rxjs';
+import { Subject, Observable, Observer, of } from 'rxjs';
+
 
 
 import {MediaMatcher} from '@angular/cdk/layout';
@@ -22,9 +23,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
   newTodoList: any;
+  newTodoList2 = new Subject();
   newTaskList: any;
   nameTodo: string;
-  //newArr;
   color: any;
   newColor = '#ccf2ff';
   isShown: boolean = false;
@@ -48,12 +49,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let userDoc = this.afs.doc('users/'+this.auth.user);
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
-      console.log('dashboard.component/ngOInit/this.newTodoList = ', this.newTodoList);
-      if(this.newTodoList){this.getAllTodoList();}
-      
+      //console.log('dashboard.component/ngOInit/this.newTodoList = ', this.newTodoList);
+      if(this.newTodoList){
+        this.newTodoList2.next(true);
+        this.getAllTodoList();
+      }
+      // console.log('this.newTodoList: ', this.newTodoList);
+      // console.log('this.newTaskList: ', this.newTaskList);
     });
 
-    console.log('dashboard user = '+this.auth.user);
+    console.log('dashboard user = '+this.auth.user)
 
     this.auth.lang.subscribe({
       next: (value: string) => {
