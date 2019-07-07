@@ -59,9 +59,9 @@
     <mat-sidenav-content>
       <app-todo 
         [nameTodo]='this.nameTodo' 
-        [newTaskList]='this.newTaskList' 
+        [newTaskList]='this.newTaskList'
+        [newTaskList2]='this.newTaskList2'
         [color]='this.color' 
-        [newTodoList2]='this.newTodoList2' 
         (changeDone)="snav.toggle()" 
         (changeAll)="getAllTodoList()" 
         (getCurrentList)="getList($event)">

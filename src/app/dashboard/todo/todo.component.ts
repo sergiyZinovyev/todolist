@@ -16,9 +16,10 @@ export class TodoComponent implements OnInit {
   @Output() changeDone = new EventEmitter<any>();
   @Output() getCurrentList = new EventEmitter<any>();
   @Input() newTaskList: any;
+  @Input() newTaskList2: any;
   @Input() nameTodo: string;
   @Input() color: string;
-  @Input() newTodoList2;
+ // @Input() newTodoList2;
 
   visible = false;
   nameTask: string;
@@ -75,7 +76,7 @@ export class TodoComponent implements OnInit {
       }
     })
    
-    this.newTodoList2.subscribe({
+    this.newTaskList2.subscribe({
       next: (value: string) => {
         console.log('value: ',value)
         if(value){this.spinVisible = false;}

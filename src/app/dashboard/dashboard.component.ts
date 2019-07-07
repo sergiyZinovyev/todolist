@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subject, Observable, Observer, of } from 'rxjs';
 
@@ -20,14 +20,18 @@ export interface Item { id: string; name: string; };
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+
+  // private itemDoc: AngularFirestoreDocument<Item>;
+  // item: Observable<Item>;
+
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
   newTodoList: any;
-  newTodoList2 = new Subject();
   newTaskList: any;
+  newTaskList2 = new Subject();
   nameTodo: string;
   color: any;
-  newColor = '#ccf2ff';
+  newColor = '#1cc6e3';
   isShown: boolean = false;
   
   lang = this.auth.curentLang;
@@ -42,20 +46,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 1600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    
   }
 
   ngOnInit() {
     let userDoc = this.afs.doc('users/'+this.auth.user);
     userDoc.collection('todolist').valueChanges().subscribe(todoList => {
       this.newTodoList = todoList;
-      //console.log('dashboard.component/ngOInit/this.newTodoList = ', this.newTodoList);
-      if(this.newTodoList){
-        this.newTodoList2.next(true);
+      if(todoList.length == 0){this.newTaskList2.next(true);}
+      else{
         this.getAllTodoList();
       }
-      // console.log('this.newTodoList: ', this.newTodoList);
-      // console.log('this.newTaskList: ', this.newTaskList);
     });
 
     console.log('dashboard user = '+this.auth.user)
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   myForm = this.fb.group({
     name: ['', [Validators.required]],
-    color: ['#ccf2ff', [Validators.required]],
+    color: ['#1cc6e3', [Validators.required]],
   })
 
   get myFormName() {return this.myForm.get('name')}
@@ -151,22 +151,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getAllTodoList(){
     let newArr = [];
     this.newTodoList.forEach(element => {
-      //console.log('1'+this.newTodoList);
       let todoDoc = this.afs.doc('users/'+this.auth.user);
       let i=0;
-      todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(taskList => {
-        i = i+1;
-        //console.log('2|i='+i+' | '+taskList);
-        if (i > 1){return}
-        if (i==1){
-          newArr = newArr.concat(taskList);
-        }
-        //console.log('newArr = ' + newArr);
-        this.newTaskList = newArr;        
-      });
+      todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(
+        taskList => {
+          i = i+1;
+          if (i > 1){return}
+          if (i==1){
+            newArr = newArr.concat(taskList);
+          }
+          this.newTaskList = newArr;
+          this.newTaskList2.next(true);      
+        },
+        err => console.log('My Error: ', err),
+        () => console.log('Completed')
+      );
+      
       
     });
     this.nameTodo = 'All tasks';
+    
   }
  
 
