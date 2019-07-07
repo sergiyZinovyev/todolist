@@ -19,13 +19,20 @@
     justify-content: space-between;
 }
 .button-style-1{
-    font-weight: bold;
+    //font-weight: bold;
     color: rgb(135, 177, 255);
     border-width: 2px;
     border-radius: 10px;
     border-color: rgb(135, 177, 255);
 }
-
+.button-style-2{
+  //font-weight: bold;
+  text-align: left;
+  color: rgb(46, 64, 97);
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: rgb(135, 177, 255);
+}
 
 
 .example-container {
@@ -97,4 +104,7 @@
   }
   .maxwidth{
     max-width: 450px;
+  }
+  .dash-btn{
+    width: 60%;
   }

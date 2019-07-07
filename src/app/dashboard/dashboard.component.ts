@@ -58,6 +58,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     });
 
+    console.log('this.mobileQuery: ', this.mobileQuery.matches)
     console.log('dashboard user = '+this.auth.user)
 
     this.auth.lang.subscribe({
@@ -169,10 +170,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       
       
     });
-    this.nameTodo = 'All tasks';
-    
+    this.nameTodo = 'All tasks';  
   }
- 
+  
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
