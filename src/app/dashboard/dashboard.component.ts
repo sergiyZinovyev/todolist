@@ -20,7 +20,7 @@ export interface Item { id: string; name: string; };
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-
+  sub;
   // private itemDoc: AngularFirestoreDocument<Item>;
   // item: Observable<Item>;
 
@@ -133,12 +133,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getList(name){
-    console.log(name);
+    console.log('new name todo:', name);
     this.nameTodo = name;
     let todoDoc = this.afs.doc('users/'+this.auth.user);
     todoDoc.collection('todolist').doc(this.nameTodo).collection(this.nameTodo).valueChanges().subscribe(taskList => {
       this.newTaskList = taskList;
-      console.log('dashboard.component/getList/this.newTaskList = '+this.newTaskList);
+      console.log('dashboard.component/getList/this.newTaskList = ', this.newTaskList);
     })
     this.newTodoList.forEach(element => {
       if (element.name == name){
@@ -154,7 +154,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.newTodoList.forEach(element => {
       let todoDoc = this.afs.doc('users/'+this.auth.user);
       let i=0;
-      todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(
+      this.sub = todoDoc.collection('todolist').doc(element.name).collection(element.name).valueChanges().subscribe(
         taskList => {
           i = i+1;
           if (i > 1){return}
@@ -170,11 +170,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       
       
     });
+    //this.sub.unsubscribe();
     this.nameTodo = 'All tasks';  
   }
   
 
+  myFunc(){
+    //this.sub.unsubscribe();
+    this.addList();
+    setTimeout(() => {
+      console.log('timeout!');
+      this.getList(this.myForm.get('name').value)
+    }, 2000);
+    
+  }
+
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 

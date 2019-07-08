@@ -25,37 +25,39 @@
 
         <div *ngIf='this.newTaskList'>
           <div class="d-flex justify-content-between"> 
-            <h5 class="m-3 ml-5 text-info">{{this.nameTodo | translate: lang}}</h5>
 
-          
-              <div class="position d-block d-sm-none">
-                <button type="button" class="btn btn-outline-info mt-3 mr-2" (click)="visible = !visible">{{'Sort data' | translate: lang}} ↓↑</button>      
-                <div *ngIf="visible" class="color-menu bg-info">
-                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('name')">
-                    {{'Task' | translate: lang}} {{nameDirect}}
-                  </button><hr class="text-white my-0 mx-2">
-                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nameTodo')">
-                    {{'Todo' | translate: lang}} {{nameTodoDirect}}
-                  </button><hr class="text-white my-0 mx-2">
-                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nowdate')">
-                    {{'Creation' | translate: lang}} {{nowdateDirect}}
-                  </button><hr class="text-white my-0 mx-2">
-                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('dateOfExecution')">
-                    {{'Execution' | translate: lang}} {{dateOfExecutionDirect}}
-                  </button><hr class="text-white my-0 mx-2">
-                  <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('priority')">
-                    {{'Priority' | translate: lang}} {{priorityDirect}}
-                  </button><hr class="text-white my-0 mx-2"> 
-                </div>
+            <div class="width-1">
+              <h6 class="m-3 ml-5 text-info"><strong>{{this.nameTodo | translate: lang}}</strong></h6>
+            </div>
+
+            <div class="position d-block d-sm-none width-2">
+              <button type="button" class="btn btn-outline-info mt-3 button-style-3" (click)="visible = !visible">{{'Sort data' | translate: lang}} ↓↑</button>      
+              <div *ngIf="visible" class="color-menu bg-info">
+                <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('name')">
+                  {{'Task' | translate: lang}} {{nameDirect}}
+                </button><hr class="text-white my-0 mx-2">
+                <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nameTodo')">
+                  {{'Todo' | translate: lang}} {{nameTodoDirect}}
+                </button><hr class="text-white my-0 mx-2">
+                <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('nowdate')">
+                  {{'Creation' | translate: lang}} {{nowdateDirect}}
+                </button><hr class="text-white my-0 mx-2">
+                <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('dateOfExecution')">
+                  {{'Execution' | translate: lang}} {{dateOfExecutionDirect}}
+                </button><hr class="text-white my-0 mx-2">
+                <button type="button" class="btn btn-info btn-block mx-0 text-left" (click) = "visible = !visible; changeFiltr('priority')">
+                  {{'Priority' | translate: lang}} {{priorityDirect}}
+                </button><hr class="text-white my-0 mx-2"> 
               </div>
-           
-
+            </div>
+  
           </div>
+
           <div *ngIf="this.nameTodo != 'All tasks'" class="mx-3 mb-2">
             <mat-accordion>
-              <mat-expansion-panel>
+              <mat-expansion-panel #addtask>
                 <mat-expansion-panel-header>
-                  <mat-panel-title>{{'Add new task to' | translate: lang}} {{this.nameTodo}} {{'list' | translate: lang}}</mat-panel-title>
+                  <mat-panel-title>{{'Add new task' | translate: lang}}</mat-panel-title>
                 </mat-expansion-panel-header>
                 <form class="example-form" [formGroup]="myTask" >
                   <mat-form-field class="form-group example-full-width">
@@ -63,7 +65,7 @@
                   </mat-form-field>
     
                   <mat-accordion>
-                    <mat-expansion-panel class='mx-n4 mb-2 mt-n4 border-0 shadow-none'>
+                    <mat-expansion-panel #moreaddtask id='more' class='mx-n4 mb-2 mt-n4 border-0 shadow-none'>
                       <mat-expansion-panel-header>
                         <mat-panel-title class='text-info'>{{'more settings...' | translate: lang}}</mat-panel-title>
                       </mat-expansion-panel-header>
@@ -87,7 +89,7 @@
                     </mat-expansion-panel>
                   </mat-accordion>
     
-                  <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask()">{{'Add task' | translate: lang}}</button>
+                  <button mat-stroked-button class="btn-lg btn-block button-style-1" (click)="addTask(); moreaddtask.close(); addtask.close()">{{'Add task' | translate: lang}}</button>
                 </form>
               </mat-expansion-panel>
             </mat-accordion>
@@ -126,7 +128,7 @@
           </mat-list>
           
 
-          <mat-divider class="border-bottom border-info mx-1 shadow-sm"></mat-divider>
+          <mat-divider class="border-bottom border-info mx-2 shadow-sm"></mat-divider>
         </div>
       </div>
     </div>

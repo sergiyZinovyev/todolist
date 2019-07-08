@@ -11,7 +11,7 @@
 
       <div class="mx-3">
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel #addtodo>
             <mat-expansion-panel-header>
               <mat-panel-title>{{'Add new ToDo' | translate: lang}}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -28,7 +28,7 @@
                   <option value="#0000ff" label="Blue">
                 </datalist>
               </mat-form-field>
-              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="addList()">{{'Add todo' | translate: lang}}</button>
+              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="myFunc(); addtodo.toggle()">{{'Add todo' | translate: lang}}</button>
             </form>
           </mat-expansion-panel>
         </mat-accordion>
@@ -40,14 +40,14 @@
 
       <mat-list class="m-3" *ngFor="let x of newTodoList; let i = index">          
         <div class="flex-space-between mb-1" >
-          <button class="btn btn-block button-style-2 dash-btn pl-2 pr-0" [ngStyle]='{"background-color": x.color}' (click)="getList(x.name); mobileQuery.matches ? snav.toggle() : ''">{{x.name | translate: lang}}</button>
+          <button class="btn btn-block pl-2 pr-0 button-style-2" [ngStyle]='{"background-color": x.color}' (click)="getList(x.name); mobileQuery.matches ? snav.toggle() : ''">{{x.name | translate: lang}}</button>
           <div class="position">
-            <button class="btn button-style-1 mr-1 px-1" (click)="i = (i+1)*-1; getCurrentColor(x.name)">{{'color' | translate: lang}}</button>      
+            <button class="btn button-style-1 mr-1 px-1 py-2" (click)="i = (i+1)*-1; getCurrentColor(x.name)">{{'color' | translate: lang}}</button>      
               <div *ngIf="!(i >= 0)" class="color-menu">
                 <input type="color" class="btn-lg button-style-1 p-0" [(ngModel)]="newColor"><br>
                 <button mat-stroked-button class="btn-lg button-style-1" (click)="editList(x.name); i = (i+1)*-1">{{'Edit' | translate: lang}}</button>
               </div>
-            <button class="btn button-style-1 px-1" (click)="delList(x.name)">{{'Delete' | translate: lang}}</button>
+            <button class="btn button-style-1 px-1 py-2" (click)="delList(x.name)">{{'Delete' | translate: lang}}</button>
           </div>
         </div>          
         <mat-divider></mat-divider>

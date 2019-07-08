@@ -106,8 +106,8 @@ export class TranslateService {
       ukr: 'Виконання'
     },
     {
-      id: 'Add new task to',
-      ukr: 'Додати нове завдання у'
+      id: 'Add new task',
+      ukr: 'Додати нове завдання'
     },
     {
       id: 'list',
