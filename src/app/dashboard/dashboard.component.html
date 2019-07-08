@@ -28,7 +28,7 @@
                   <option value="#0000ff" label="Blue">
                 </datalist>
               </mat-form-field>
-              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="myFunc(); addtodo.toggle()">{{'Add todo' | translate: lang}}</button>
+              <button mat-stroked-button color="primary" class="btn-lg btn-block button-style-1" (click)="myFunc(); addtodo.toggle(); mobileQuery.matches ? snav.toggle() : ''">{{'Add todo' | translate: lang}}</button>
             </form>
           </mat-expansion-panel>
         </mat-accordion>

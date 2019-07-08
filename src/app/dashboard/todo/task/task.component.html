@@ -1,7 +1,7 @@
 
 <div class="itemTask" [ngStyle] = '{"background-color": this.task.color}'>
   <div [ngClass]="myclass" class="priority align-baseline" (click)="editDone()"></div>
-  <mat-expansion-panel class='border-0 shadow-none p-0 itemTask' [ngStyle] = '{"background-color": this.task.color}'>
+  <mat-expansion-panel class='border-0 shadow-none p-0 m-0 itemTask' [ngStyle] = '{"background-color": this.task.color}'>
 
     <mat-expansion-panel-header (click)="getTask(this.task.name)" class="p-2">
 
@@ -23,15 +23,20 @@
 
     </mat-expansion-panel-header>
 
-    <div class="p-3 mb-2 text-white" [ngStyle] = '{"background-color": this.task.color}'>
-      <form class="example-form" [formGroup]="myTask" >
-        <mat-form-field class="form-group example-full-width">
-          <input type="text" matInput placeholder="{{'date of creation' | translate: lang}}" formControlName="nowdate">
+    <div class="text-white m-0" [ngStyle] = '{"background-color": this.task.color}'>
+      <form [formGroup]="myTask" >
+
+        <div class="row">
+
+        <mat-form-field class="form-group example-full-width col-6 col-md-3">
+          <input type="date" matInput placeholder="{{'date of creation' | translate: lang}}" formControlName="nowdate">
         </mat-form-field>
-        <mat-form-field class="form-group example-full-width">
-          <input type="text" matInput placeholder="{{'date of execution' | translate: lang}}" formControlName="dateOfExecution">
+
+        <mat-form-field class="form-group example-full-width col-6 col-md-3">
+          <input type="date" matInput placeholder="{{'date of execution' | translate: lang}}" formControlName="dateOfExecution">
         </mat-form-field>
-        <mat-form-field class="form-group example-full-width">
+
+        <mat-form-field class="form-group example-full-width col-6 col-md-3">
           <mat-label>{{'priority' | translate: lang}}</mat-label>
           <select matNativeControl formControlName="priority">
             <option value=1>{{'High' | translate: lang}}</option>
@@ -39,16 +44,21 @@
             <option value=3>{{'Low' | translate: lang}}</option>
           </select>
         </mat-form-field>
-        <mat-form-field class="form-group example-full-width">
-          <textarea matInput placeholder="{{'discription' | translate: lang}}" formControlName="discription"></textarea>
-        </mat-form-field>
-        <mat-form-field class="form-group example-full-width">
+
+        <mat-form-field class="form-group example-full-width col-6 col-md-3">
           <mat-label>{{'done' | translate: lang}}</mat-label>
           <select matNativeControl formControlName="done">
             <option value=true>{{'true' | translate: lang}}</option>
             <option value=false>{{'false' | translate: lang}}</option>
           </select>
         </mat-form-field> 
+
+        <mat-form-field class="form-group example-full-width col-12">
+          <textarea matInput placeholder="{{'discription' | translate: lang}}" formControlName="discription"></textarea>
+        </mat-form-field>
+
+        </div>
+
       </form>
       <div *ngIf="this.nameTodo != 'All tasks'" class="btn-group btn-block mt-2" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" (click)="addTask()">{{'Edit' | translate: lang}}</button>

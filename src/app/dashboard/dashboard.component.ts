@@ -170,7 +170,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       
       
     });
-    //this.sub.unsubscribe();
+    this.sub.unsubscribe();
     this.nameTodo = 'All tasks';  
   }
   
